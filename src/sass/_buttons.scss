@@ -1,0 +1,25 @@
+.btn {
+  display: block;
+  border-radius: 5px;
+
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  text-align: center;
+  text-transform: uppercase;
+  background-color: var(--white-text-color);
+  color: var(--black-text-color);
+  opacity: 1;
+
+  transition: opacity var(--animation-duration) var(--timing-function);
+}
+
+.btn--active {
+  border: none;
+  background-color: var(--accent-color);
+  color: var(--white-text-color);
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
