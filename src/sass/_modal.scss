@@ -163,36 +163,16 @@
 }
 
 .modal-form__btn {
-  display: block;
-  margin: 0;
-
   width: 113px;
   height: 44px;
-  border-radius: 5px;
-
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 1.33;
-  text-align: center;
-  text-transform: uppercase;
 
   @media screen and (min-width: 768px) {
     width: 125px;
-    height: 44px;
   }
   @media screen and (min-width: 1024px) {
     width: 136px;
-    height: 44px;
   }
-}
-
-.modal-form__btn--watched {
-  margin-right: 15px;
-  border: none;
-  background-color: var(--accent-color);
-  color: var(--white-text-color);
-}
-
-.modal-form__btn--queue {
-  color: var(--black-text-color);
+  &:not(:last-child) {
+    margin-right: 15px;
+  }
 }
