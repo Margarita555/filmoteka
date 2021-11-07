@@ -1,0 +1,237 @@
+/* Переменные временно сдесь, потом уберу*/
+:root {
+  --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  --animation-duration: 250ms;
+}
+/*Сброс временно сдесь, пото уберу*/
+h2,
+p,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+body {
+  font-family: Roboto;
+}
+
+/*Цвета не в переменных временно*/
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 1;
+  pointer-events: initial;
+  transition: opacity var(--animation-duration) var(--timing-function);
+}
+
+.overlay.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal-form {
+  position: relative;
+  width: 280px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #ffffff;
+}
+
+@media screen and (min-width: 768px) {
+  .modal-form {
+    width: 618px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .modal-form {
+    width: 882px;
+  }
+}
+
+.modal-form__close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color var(--animation-duration) var(--timing-function);
+  outline: none;
+  background-image: url("./images/close.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.modal-form__card {
+  padding: 48px 20px 40px;
+}
+@media screen and (min-width: 768px) {
+  .modal-form__card {
+    display: flex;
+    padding: 42px 30px 40px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .modal-form__card {
+    padding: 50px 30px 40px;
+  }
+}
+
+.card__image {
+  display: block;
+  width: 240px;
+  margin-bottom: 30px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+@media screen and (min-width: 768px) {
+  .card__image {
+    width: 264px;
+    margin-bottom: 0;
+    margin-right: 32px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .card__image {
+    width: 396px;
+    margin-right: 30px;
+  }
+}
+.card__name {
+  margin-bottom: 20px;
+
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.15;
+  text-transform: uppercase;
+  color: #000000;
+}
+
+@media screen and (min-width: 1024px) {
+  .card__name {
+    margin-bottom: 30px;
+
+    font-size: 30px;
+    line-height: 1.167;
+  }
+}
+
+.card__parametes {
+  margin-bottom: 20px;
+}
+
+.card__parameter:nth-last-child() {
+  margin-bottom: 10px;
+}
+
+.parameter__name {
+  display: inline-block;
+  width: 108px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  color: #8c8c8c;
+}
+
+@media screen and (min-width: 1024px) {
+  .parameter__name {
+    width: 152px;
+  }
+}
+
+.parameter__value {
+  display: inline-block;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.167;
+  color: #000000;
+}
+
+.parameter__value--vote {
+  width: 36px;
+  padding: 1px 0px;
+  text-align: center;
+  background-color: #ff6b01;
+  color: #ffffff;
+  border-radius: 5px;
+}
+
+.card__about-caption {
+  margin-bottom: 10px;
+
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  color: #000000;
+  text-transform: uppercase;
+}
+
+.card__about {
+  margin-bottom: 20px;
+
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.67;
+  color: #000000;
+}
+
+.modal-form__buttons {
+  display: flex;
+}
+
+.modal-form__btn {
+  display: block;
+  margin: 0;
+
+  width: 113px;
+  height: 44px;
+  border-radius: 5px;
+
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  text-align: center;
+  text-transform: uppercase;
+}
+@media screen and (min-width: 768px) {
+  .modal-form__btn {
+    width: 125px;
+    height: 44px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .modal-form__btn {
+    width: 136px;
+    height: 44px;
+  }
+}
+
+.modal-form__btn--watched {
+  margin-right: 15px;
+  border: none;
+  background-color: #ff6b01;
+  color: #ffffff;
+}
+
+
+.modal-form__btn--queue {
+  background-color: #ffffff;
+  color: #000000;
+}
