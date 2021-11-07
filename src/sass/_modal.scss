@@ -74,7 +74,7 @@ body {
   cursor: pointer;
   transition: background-color var(--animation-duration) var(--timing-function);
   outline: none;
-  background-image: url("./images/close.svg");
+  background-image: url("../images/close.svg");
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -137,7 +137,7 @@ body {
   margin-bottom: 20px;
 }
 
-.card__parameter:nth-last-child() {
+.card__parameter:not(:last-child) {
   margin-bottom: 10px;
 }
 
