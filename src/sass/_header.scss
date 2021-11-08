@@ -12,6 +12,10 @@
   padding-left: 71px;
   padding-right: 71px;
 }
+.logo{
+  width: 24px;
+  height: 24px;
+}
 .header__logo {
   margin: 40px 98px 154px 0px;
   position: relative;
@@ -21,16 +25,16 @@
   color: #ffffff;
   text-decoration: none;
 }
-.header__logo::before {
-  position: absolute;
-  background-image: url('../images/film.svg');
-  content: '';
-  contain: content;
-  width: 24px;
-  height: 24px;
-  left: -32px;
-  top: 7px;
-}
+// .header__logo::before {
+//   position: absolute;
+//   background-image: url('../images/film.svg');
+//   content: '';
+//   contain: content;
+//   width: 24px;
+//   height: 24px;
+//   left: -32px;
+//   top: 7px;
+// }
 
 .header__search-form {
   width: 336px;
