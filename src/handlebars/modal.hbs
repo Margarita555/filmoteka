@@ -1,21 +1,13 @@
-<div class='overlay'>
-<form class='modal-form'>
-    <button type='button' class='modal-form__close-btn' data-menu-close>
-    <svg class='modal-form__close-icon'>
-        <use href=''></use>
-    </svg>
-    </button>
-    <div class='modal-form__card'>
-        <img class='card__image' src='{{backdrop_path}}' />
-        <div class='card__info'>
-        <h2 class='card__name'>{{title}}</h2>
-        <ul class='card__parametes'>
+<img class='card__image' src='https://image.tmdb.org/t/p/w500{{poster_path}}' />
+<div class='card__info'>
+    <h2 class='card__name'>{{title}}</h2>
+    <ul class='card__parametes'>
         <li class='card__parameter'>
             <span class='parameter__name'>Vote / Votes</span>
             <span class='parameter__value parameter__value--vote'>{{vote_average}}</span>
             <spam class='parameter__value'>/</spam>
             <span class='parameter__value'>{{vote_count}}</span>
-            </li>
+        </li>
         <li class='card__parameter'>
             <span class='parameter__name'>Popularity</span>
             <span class='parameter__value'>{{popularity}}</span>
@@ -30,18 +22,15 @@
             <span class='parameter__value'>{{this.name}}</span>
             {{/each}}
         </li>
-        </ul>
-        <p class='card__about-caption'>About</p>
-        <p class='card__about'></p>
-        <div class='modal-form__buttons'>
+    </ul>
+    <p class='card__about-caption'>About</p>
+    <p class='card__about'>{{overview}}</p>
+    <div class='modal-form__buttons'>
         <button class='btn modal-form__btn' type='button'>
             add to watched
         </button>
         <button class='btn modal-form__btn' type='button'>
             add to queue
         </button>
-        </div>
-        </div>
     </div>
-</form>
-</div>
+    </div>
