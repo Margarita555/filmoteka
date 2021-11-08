@@ -1,0 +1,19 @@
+.footer {
+    display: flex;
+    margin: auto;
+    background-color: #F7F7F7;
+}
+
+.footer-container {
+    display: flex;
+    margin: 30px auto 30px auto;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.17;
+    align-items: center;
+    color: var(--footer-text-color);
+} 
+
+.footer-container_indent {
+    margin-right: 10px;
+}
