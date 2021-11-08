@@ -1,7 +1,14 @@
 
 {{#each this}}
-   <li>
-      <img src='https://image.tmdb.org/t/p/w300{{backdrop_path}}' alt='{{original_title}}'>    
-      <p>{{title}}</p>   
-   </li>
+<li class="test" data-id='{{id}}'>
+   {{#if poster_path}}
+   <img class="test" src="https://image.tmdb.org/t/p/w500{{poster_path}}" alt="{{original_title}}"
+      data-type="{{media_type}}" data-src="{{id}}" height="400">
+   {{else}}
+   <img class="test" src="https://i.pinimg.com/736x/7e/1c/0b/7e1c0b3223789770299bc3b66b2fc2a0.jpg"
+      data-src="{{id}}" height="400" />
+   {{/if}}
+   <h2 class="test">{{title}}</h1>
+   <p class="test">{{release_date}}</p>
+</li>
 {{/each}}
