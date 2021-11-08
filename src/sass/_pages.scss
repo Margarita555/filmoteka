@@ -1,0 +1,60 @@
+.page {
+  padding-top: 25px;
+  padding-bottom: 60px;
+}
+
+.page__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page__numbers--container {
+  display: flex;
+}
+
+.page__block {
+  padding: 13px 11px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Roboto;
+  color: #000000;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+}
+
+.page__number--active {
+  color: #ffffff;
+  background-color: #ff6b08;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.page__btn {
+  border: none;
+  border-radius: 5px;
+  background-color: F7F7F7;
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+}
+
+.page__ellipsis--hidden {
+  display: none;
+}
+
+.page__btn--arrow {
+  border: none;
+  background-color: transparent;
+  width: 40px;
+  height: 40px;
+  font-size: 9px;
+
+  @media screen and (min-width: 320px) and (max-width: 768px) {
+    display: none;
+  }
+}
