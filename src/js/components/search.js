@@ -11,12 +11,5 @@ async function onSearchInput(e) {
   insertPoint.innerHTML = '';
   e.preventDefault();
   const results = await fetchMovieSearchQuery(searchInputRef.value);
-  if (!results.lengths) {
-    console.log(results);
-    console.log(insertPoint);
-    insertPoint.insertAdjacentHTML('beforeend', card(results))
-    return;
-  }
-  
-  //   renderGallery(resolve.hits);
+  if (!results.lengths) insertPoint.insertAdjacentHTML('beforeend', card(results));
 }
