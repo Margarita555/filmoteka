@@ -8,7 +8,7 @@ searchBtnRef.addEventListener('click', onSearchInput);
 
 async function onSearchInput(e) {
   if (!searchInputRef.value.trim()) return;
-  //   galleryRef.innerHTML = '';
+  insertPoint.innerHTML = '';
   e.preventDefault();
   const results = await fetchMovieSearchQuery(searchInputRef.value);
   if (!results.lengths) {
