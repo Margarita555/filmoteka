@@ -14,7 +14,7 @@ const API = function () {
 // Фетч полной информации о трендах
 API.prototype.fetchMovieTrending = async function () {
   try {
-    const response = await axios.get('/trending/movie/day?');
+    const response = await axios.get(`/trending/movie/day?page=${this._page}`);
     return response.data.results;
   } catch (error) {
     console.error(error);
@@ -22,18 +22,17 @@ API.prototype.fetchMovieTrending = async function () {
 };
 
 // Фетч популярных фильмов
-API.prototype.fetchMoviePopular = async function () {
-  try {
-    const response = await axios.get(`/movie/popular?page=${this._page}`);
-    return response.data.results;
-  } catch (error) {
-    console.error(error);
-  }
-};
+// API.prototype.fetchMoviePopular = async function () {
+//   try {
+//     const response = await axios.get(`/movie/popular?`);
+//     return response.data.results;
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
 
 // Фетч по поисковому запросу
 API.prototype.fetchMovieSearchQuery = async function () {
-  console.log(this._page);
   try {
     const response = await axios.get(
       `/search/movie?&query=${this._searchQuery}&page=${this._page}`,
@@ -62,6 +61,15 @@ API.prototype._setQuery = function (newQuery) {
 // записывает новый _searchQuery
 API.prototype._setId = function (newId) {
   this._movieId = newId;
+};
+
+// записывает новую страницу
+API.prototype._setPage = function (newPage) {
+  this._page = newPage;
+};
+// сбрас страниц
+API.prototype._resetPage = function () {
+  this._page = 1;
 };
 
 //увеличить значение страницы на еденицу

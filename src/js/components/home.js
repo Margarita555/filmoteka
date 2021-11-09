@@ -5,9 +5,8 @@ import card from '../../handlebars/cardMovie.hbs';
 const { insertPoint, homeLink } = getRefs();
 
 const api = new API();
-
 api
-  .fetchMoviePopular()
+  .fetchMovieTrending()
   .then(result => {
     insertPoint.insertAdjacentHTML('beforeend', card(result));
     homeLink.classList.add('active');
