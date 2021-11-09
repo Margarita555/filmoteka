@@ -1,4 +1,4 @@
-<header class="header ">
+<header class="header__background-home" id="header">
     <div class=" container header__container">
         <nav class="header__nav">
             <a href="./index.html" class="header__logo">
@@ -23,10 +23,14 @@
                     class="header__search-form-input" id="search-form-input" />
                 <button type="submit" class="header__form-btn"></button>
             </form>
-            <div class="header__search-error is-hidden">
+            <div class="header__search-error">
                 <p class="header__search-error-text">Search result not successful. Enter the correct movie name and</p>
             </div>
         </div>
 
+        <div class="header__button disabled">
+            <button type="submit" class="btn btn--active" id="btn-watched">Watched</button>
+            <button type="submit" class="btn" id="btn-queue">queue</button>
+        </div>
     </div>
 </header>

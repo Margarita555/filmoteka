@@ -159,6 +159,24 @@
   background: var(--accent-color);
   border-radius: 2px;
 }
+
+.header__button {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 68px;
+  @media screen and (min-width: 320px) {
+    width: 100%;
+  }
+  @media screen and (min-width: 768px) {
+    width: 287px;
+  }
+  // @media screen and (min-width: 1024px) {
+  // }
+}
+.header__button.disabled {
+  display: none;
+}
+
 // @media screen and (min-width: 320px) {
 // }
 // @media screen and (min-width: 768px) {
