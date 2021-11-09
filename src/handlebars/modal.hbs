@@ -1,36 +1,48 @@
 <img class='card__image' src='https://image.tmdb.org/t/p/w500{{poster_path}}' />
 <div class='card__info'>
-    <h2 class='card__name'>{{title}}</h2>
-    <ul class='card__parametes'>
-        <li class='card__parameter'>
-            <span class='parameter__name'>Vote / Votes</span>
+<h2 class='card__name'>{{title}}</h2>
+<ul class='card__parametes'>
+    <ul class='parameters__labels'>
+        <li class='parameters__label'>
+            <span class='parameter__label'>Vote / Votes</span>
+        </li>
+        <li class='parameters__label'>
+            <span class='parameter__label'>Popularity</span>
+        </li>
+        <li class='parameters__label'>
+            <span class='parameter__label'>Original Title</span>
+        </li>
+        <li class='parameters__label'>
+            <span class='parameter__label'>Genre</span>
+        </li>
+    </ul>
+    <ul class='parameters__values'>
+        <li class='parameters__value'>
             <span class='parameter__value parameter__value--vote'>{{vote_average}}</span>
             <spam class='parameter__value'>/</spam>
             <span class='parameter__value'>{{vote_count}}</span>
         </li>
-        <li class='card__parameter'>
-            <span class='parameter__name'>Popularity</span>
-            <span class='parameter__value'>{{popularity}}</span>
-        </li>
-        <li class='card__parameter'>
-            <span class='parameter__name'>Original Title</span>
-            <span class='parameter__value'>{{original_title}}</span>
-        </li>
-        <li class='card__parameter'>
-            <span class='parameter__name'>Genre</span>
-            {{#each genres}}
-            <span class='parameter__value'>{{this.name}}</span>
-            {{/each}}
-        </li>
+    <li class='parameters__value'>
+        <span class='parameter__value'>{{popularity}}</span>
+    </li>
+    <li class='parameters__value'>
+        <span class='parameter__value'>{{original_title}}</span>
+    </li>
+    <li class='parameters__value'>
+        {{#each genres}}
+        <span class='parameter__value'>{{this.name}}</span>
+        {{/each}}
+    </li>
     </ul>
-    <p class='card__about-caption'>About</p>
-    <p class='card__about'>{{overview}}</p>
-    <div class='modal-form__buttons'>
-        <button class='btn modal-form__btn' type='button'>
-            add to watched
-        </button>
-        <button class='btn modal-form__btn' type='button'>
-            add to queue
-        </button>
-    </div>
-    </div>
+</ul>
+<p class='card__about-caption'>About</p>
+<p class='card__about'>{{overview}}</p>
+<div class='modal-form__buttons'>
+    <button class='btn modal-form__btn' type='button'>
+        add to watched
+    </button>
+    <button class='btn modal-form__btn' type='button'>
+        add to queue
+    </button>
+</div>
+</div>
