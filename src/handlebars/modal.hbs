@@ -3,25 +3,25 @@
 <h2 class='card__name'>{{title}}</h2>
 <ul class='card__parametes'>
     <ul class='parameters__labels'>
-        <li class='parameters__label'>
-            <span class='parameter__label'>Vote / Votes</span>
-        </li>
-        <li class='parameters__label'>
-            <span class='parameter__label'>Popularity</span>
-        </li>
-        <li class='parameters__label'>
-            <span class='parameter__label'>Original Title</span>
-        </li>
-        <li class='parameters__label'>
-            <span class='parameter__label'>Genre</span>
-        </li>
+    <li class='parameters__label'>
+        <span class='parameter__label'>Vote / Votes</span>
+    </li>
+    <li class='parameters__label'>
+        <span class='parameter__label'>Popularity</span>
+    </li>
+    <li class='parameters__label'>
+        <span class='parameter__label'>Original Title</span>
+    </li>
+    <li class='parameters__label'>
+        <span class='parameter__label'>Genre</span>
+    </li>
     </ul>
     <ul class='parameters__values'>
-        <li class='parameters__value'>
-            <span class='parameter__value parameter__value--vote'>{{vote_average}}</span>
-            <spam class='parameter__value'>/</spam>
-            <span class='parameter__value'>{{vote_count}}</span>
-        </li>
+    <li class='parameters__value'>
+        <span class='parameter__value parameter__value--vote'>{{vote_average}}</span>
+        <spam class='parameter__value'>/</spam>
+        <span class='parameter__value'>{{vote_count}}</span>
+    </li>
     <li class='parameters__value'>
         <span class='parameter__value'>{{popularity}}</span>
     </li>
@@ -35,14 +35,19 @@
     </li>
     </ul>
 </ul>
+<details class='mobile-about'>
+    <summary class='mobile-about-caption'>About</summary>
+    {{overview}}
+</details>
 <p class='card__about-caption'>About</p>
 <p class='card__about'>{{overview}}</p>
+
 <div class='modal-form__buttons'>
-    <button class='btn modal-form__btn' type='button'>
+    <button class='btn modal-form__btn btn--active' type='button'>
         add to watched
     </button>
     <button class='btn modal-form__btn' type='button'>
-        add to queue
+    add to queue
     </button>
 </div>
 </div>

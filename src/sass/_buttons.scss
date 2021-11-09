@@ -10,8 +10,8 @@
   background-color: var(--white-text-color);
   color: var(--black-text-color);
   opacity: 1;
-
-  transition: opacity var(--animation-duration) var(--timing-function);
+  transition: opacity var(--modal-transition-delay) var(--default-transition-timing);
+  cursor: pointer;
 }
 
 .btn--active {

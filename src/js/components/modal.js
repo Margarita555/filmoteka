@@ -16,19 +16,19 @@ async function onClickOnCard(e) {
     modalСardRef.insertAdjacentHTML('beforeend', modal(result));
     lightboxRef.classList.add('is-open');
     clsBtnRef.addEventListener('click', closeModal);
-    overlayRef.addEventListener('click', closeModal);
-    window.addEventListener('keydown', onEscape);
+    overlayRef.addEventListener('click', e => {
+      if (e.target === overlayRef) closeModal();
+    });
+    window.addEventListener('keydown', e => {
+      if (e.code === 'Escape') closeModal();
+    });
   }
-}
-
-function onEscape(e) {
-  if (e.code === 'Escape') closeModal();
 }
 
 function closeModal() {
   modalСardRef.innerHTML = '';
   lightboxRef.classList.remove('is-open');
-  clsBtnRef.removeEventListener('click', onClickClsBtn);
+  clsBtnRef.removeEventListener('click', closeModal);
   overlayRef.removeEventListener('click', closeModal);
-  window.removeEventListener('keydown', onEscape);
+  window.removeEventListener('keydown', closeModal);
 }
