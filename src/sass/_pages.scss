@@ -43,6 +43,12 @@
   margin: 5px;
 }
 
+.page__ellipsis {
+  @media screen and (min-width: 320px) and (max-width: 768px) {
+    display: none;
+  }
+}
+
 .page__ellipsis--hidden {
   display: none;
 }
