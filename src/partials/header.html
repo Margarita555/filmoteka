@@ -1,8 +1,8 @@
-<header class="header ">
+<header class="header__background-library">
     <div class=" container header__container">
         <nav class="header__nav">
             <a href="./index.html" class="header__logo">
-                <svg class="logo animate__animated animate__shakeY animate__infinite animate__fast">
+                <svg class="logo animate__animated animate__shakeY animate__repeat-3 animate__faster">
                     <use class=" animate__delay-5s  " href="./images/sprite.svg#film"></use>
                 </svg><span class="header__logo-span"> Filmoteka</span>
 
@@ -17,7 +17,7 @@
             </ul>
         </nav>
 
-        <div class="header__form">
+        <div class="header__form disabled">
             <form class="header__search-form" id="search-form">
                 <input type="text" name="query" autocomplete="off" placeholder="Поиск фильмов"
                     class="header__search-form-input" id="search-form-input" />
@@ -27,6 +27,9 @@
                 <p class="header__search-error-text">Search result not successful. Enter the correct movie name and</p>
             </div>
         </div>
-
+        <div class="header__button">
+            <button type="submit" class="btn btn--active">Watched</button>
+            <button type="submit" class="btn">queue</button>
+        </div>
     </div>
 </header>
