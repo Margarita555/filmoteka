@@ -1,9 +1,9 @@
 import getRefs from '../refs/get-refs';
-import fetchObj from '../API/api-service';
+import API from '../API/api-service';
 import modal from '../../handlebars/modal.hbs';
 
 const { insertPoint, modalСardRef, overlayRef, lightboxRef, clsBtnRef } = getRefs();
-const { fetchMovieDescription } = fetchObj;
+const api = new API();
 
 //cardRef = insertPoint.querySelector('');
 insertPoint.addEventListener('click', onClickOnCard);
@@ -11,7 +11,8 @@ insertPoint.addEventListener('click', onClickOnCard);
 async function onClickOnCard(e) {
   if (e.target.nodeName === 'IMG') {
     e.preventDefault();
-    const result = await fetchMovieDescription(e.target.dataset.src);
+    api._setId(e.target.dataset.src);
+    const result = await api.fetchMovieDescription();
     modalСardRef.insertAdjacentHTML('beforeend', modal(result));
     lightboxRef.classList.add('is-open');
     clsBtnRef.addEventListener('click', closeModal);
