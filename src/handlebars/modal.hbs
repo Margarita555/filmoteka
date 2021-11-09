@@ -1,4 +1,10 @@
-<img class='card__image' src='https://image.tmdb.org/t/p/w500{{poster_path}}' />
+{{#if poster_path}}
+<img class='card__image' src='https://image.tmdb.org/t/p/w500{{poster_path}}' alt="{{original_title}}"
+    data-type="{{media_type}}" data-src="{{id}}">
+{{else}}
+<img class='card__image' src="https://i.pinimg.com/736x/7e/1c/0b/7e1c0b3223789770299bc3b66b2fc2a0.jpg"
+    data-src="{{id}}" />
+{{/if}}
 <div class='card__info'>
 <h2 class='card__name'>{{title}}</h2>
 <ul class='card__parametes'>
