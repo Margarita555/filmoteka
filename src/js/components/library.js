@@ -18,18 +18,19 @@ function openLibrary(e) {
   libraryLink.classList.add('active');
   headerForm.classList.add('disabled');
   headerButton.classList.remove('disabled');
-
-  allStorage();
 }
-function allStorage() {
-  var values = [],
-    keys = Object.keys(localStorage),
-    i = keys.length;
-  console.log(keys);
-  while (i--) {
-    values.push(JSON.parse(localStorage.getItem(keys[i])));
-  }
-  console.log(values);
+function watchedStorage() {
+  insertPoint.innerHTML = '';
+  let items = JSON.parse(localStorage.getItem('Watched'));
+  console.log(items);
 
-  insertPoint.insertAdjacentHTML('beforeend', card(values));
+  insertPoint.insertAdjacentHTML('beforeend', card(items));
 }
+function queuedStorage() {
+  insertPoint.innerHTML = '';
+  let items = JSON.parse(localStorage.getItem('Queue'));
+  console.log(items);
+  insertPoint.insertAdjacentHTML('beforeend', card(items));
+}
+btnWatched.addEventListener('click', watchedStorage);
+btnQueue.addEventListener('click', queuedStorage);
