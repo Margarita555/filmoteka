@@ -21,6 +21,15 @@ API.prototype.fetchMovieTrending = async function () {
   }
 };
 
+API.prototype.fetchMovieTrendingData = async function () {
+  try {
+    const response = await axios.get(`/trending/movie/day?page=${this._page}`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 // Фетч популярных фильмов
 // API.prototype.fetchMoviePopular = async function () {
 //   try {

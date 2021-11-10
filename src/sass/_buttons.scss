@@ -10,8 +10,12 @@
   background-color: inherit;
   color: var(--white-text-color);
   opacity: 1;
+
+  transition: opacity var(--modal-transition-delay) var(--default-transition-timing);
+  cursor: pointer;
+
   border: 1px solid #ffffff;
-  transition: opacity var(--animation-duration) var(--timing-function);
+
   outline: none;
   @media screen and (min-width: 320px) {
     width: 130px;
@@ -21,6 +25,7 @@
     width: 136px;
     padding: 14px 38px;
   }
+
 }
 
 .btn--active {
