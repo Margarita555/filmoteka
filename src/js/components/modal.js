@@ -9,9 +9,10 @@ const api = new API();
 insertPoint.addEventListener('click', onClickOnCard);
 
 async function onClickOnCard(e) {
-  if (e.target.nodeName === 'IMG') {
+  if (e.target.nodeName !== 'UL') {
     e.preventDefault();
-    api._setId(e.target.dataset.src);
+    const imgRef = e.target.parentNode.querySelector('img');
+    api._setId(imgRef.dataset.src);
     const result = await api.fetchMovieDescription();
     modalСardRef.insertAdjacentHTML('beforeend', modal(result));
     lightboxRef.classList.add('is-open');
