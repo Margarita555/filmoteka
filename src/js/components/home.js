@@ -8,23 +8,23 @@ const api = new API();
 api
   .fetchMovieTrending()
   .then(result => {
-    console.log(result)
+    let newResult = result.map(el => ({
+      ...el,
+      release_date: el.release_date.split('-')[0],
+    }));
     api
       .genre()
-        .then(genresList => {
-          console.log(genresList)
-          
+      .then(genresList => {
+        console.log(genresList);
       })
       .catch(err => {
         console.log(err);
       });
-    
+
     // result = genresList.map((x) => ({ genre_ids: x.id, name: x.name }))
     // console.log(result);
 
-
-
-    insertPoint.insertAdjacentHTML('beforeend', card(result));
+    insertPoint.insertAdjacentHTML('beforeend', card(newResult));
     homeLink.classList.add('active');
     libraryLink.classList.remove('active');
     headerForm.classList.remove('disabled');
@@ -33,7 +33,3 @@ api
   .catch(err => {
     console.log(err);
   });
-
-
-  
-  
