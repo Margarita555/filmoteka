@@ -13,7 +13,9 @@ async function onClickOnCard(e) {
     e.preventDefault();
     api._setId(e.target.dataset.src);
     const result = await api.fetchMovieDescription();
+
     modalСardRef.insertAdjacentHTML('beforeend', modal(result));
+    addItemToLocalStorage(result);
     lightboxRef.classList.add('is-open');
     clsBtnRef.addEventListener('click', closeModal);
     overlayRef.addEventListener('click', e => {
@@ -31,4 +33,8 @@ function closeModal() {
   clsBtnRef.removeEventListener('click', closeModal);
   overlayRef.removeEventListener('click', closeModal);
   window.removeEventListener('keydown', closeModal);
+}
+function addItemToLocalStorage(i) {
+  let res = JSON.stringify(i);
+  localStorage.setItem(`${i.id}`, res);
 }
