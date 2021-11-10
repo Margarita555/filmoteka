@@ -15,5 +15,14 @@ export default function getRefs() {
     btnQueue: document.querySelector('#btn-queue'),
     headerForm: document.querySelector('.header__form'),
     headerButton: document.querySelector('.header__button'),
+
+
+
+
+
+
+
+    spinnerRef: document.querySelector('.loading-spinner'),
+    spinnerDotsRefs: document.querySelector('.loading-dots'),
   };
 }

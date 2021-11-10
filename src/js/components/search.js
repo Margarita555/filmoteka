@@ -14,3 +14,23 @@ async function onSearchInput(e) {
   const results = await api.fetchMovieSearchQuery();
   if (!results.lengths) insertPoint.insertAdjacentHTML('beforeend', card(results));
 }
+
+
+
+// ===========будь ласка добавте функцію spinner=========
+// ===========нижче код, як працює зі спінером========
+
+// import {startSpinner, stopSpinner} from './spinner.js';
+
+// searchBtnRef.addEventListener('click', onSearchInput);
+
+// async function onSearchInput(e) {
+//   if (!searchInputRef.value.trim()) return;
+//   insertPoint.innerHTML = '';
+//   e.preventDefault();
+//   api._setQuery(searchInputRef.value);
+//   startSpinner();
+//   const results = await api.fetchMovieSearchQuery();
+//   if (!results.lengths) insertPoint.insertAdjacentHTML('beforeend', card(results));
+//   stopSpinner();
+// }
