@@ -32,6 +32,8 @@
   align-items: center;
   justify-content: center;
 }
+
+// ============================== БЛОК НАВИГАЦИИ  ==============================
 .header__nav {
   width: 100%;
   display: flex;
@@ -93,6 +95,8 @@
 .header__nav-home-link {
   margin-right: 39px;
 }
+
+// ================================  БЛОК ПОИСКА(ФОРМА)  ============================
 .header__form.disabled {
   display: none;
 }
@@ -173,10 +177,12 @@
   background: var(--accent-color);
   border-radius: 2px;
 }
+
+// =============================  БЛОК КНОПОК  ====================================
 .header__button {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 65px;
+  margin-bottom: 68px;
   @media screen and (min-width: 320px) {
     width: 100%;
   }
@@ -186,6 +192,42 @@
 }
 .header__button.disabled {
   display: none;
+}
+.header__btn {
+  display: block;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  text-align: center;
+  text-transform: uppercase;
+  background-color: inherit;
+  color: var(--white-text-color);
+  opacity: 1;
+  transition: opacity var(--modal-transition-delay) var(--default-transition-timing);
+  cursor: pointer;
+  border: 1px solid #ffffff;
+
+  outline: none;
+  @media screen and (min-width: 320px) {
+    width: 130px;
+    padding: 14px 36px;
+  }
+  @media screen and (min-width: 768px) {
+    width: 136px;
+    padding: 14px 38px;
+  }
+}
+
+.header__btn-active {
+  border: none;
+  background-color: var(--accent-color);
+  color: var(--white-text-color);
+  filter: drop-shadow(0px 8px 43px rgba(255, 107, 1, 0.6));
+}
+
+.header__btn:hover {
+  opacity: 0.8;
 }
 // @media screen and (min-width: 320px) {
 // }
