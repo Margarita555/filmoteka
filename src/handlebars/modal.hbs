@@ -1,45 +1,34 @@
 {{#if poster_path}}
-<img class='card__image' src='https://image.tmdb.org/t/p/w500{{poster_path}}' alt="{{original_title}}"
-    data-type="{{media_type}}" data-src="{{id}}">
+<img class='card__image' src='https://image.tmdb.org/t/p/w500{{poster_path}}' alt='{{original_title}}'
+    data-type='{{media_type}}' data-src='{{id}}' />
 {{else}}
-<img class='card__image' src="https://i.pinimg.com/736x/7e/1c/0b/7e1c0b3223789770299bc3b66b2fc2a0.jpg"
-    data-src="{{id}}" />
+<img class='card__image' src='https://kinomaiak.ru/wp-content/uploads/2018/02/noposter.png' data-src='{{id}}' />
 {{/if}}
 <div class='card__info'>
 <h2 class='card__name'>{{title}}</h2>
-<ul class='card__parametes'>
-    <ul class='parameters__labels'>
-    <li class='parameters__label'>
-        <span class='parameter__label'>Vote / Votes</span>
+<ul class='card__parameters'>
+    <li class='card__parameter card__parameter--votes'>
+        <p class='parameter__label'>Vote / Votes</p>
+        <p class='parameter__value parameter__value--avg'>{{vote_average}}</p>
+        <p class='parameter__value'> / </p>
+        <p class='parameter__value parameter__value--cnt'>{{vote_count}}</p>
     </li>
-    <li class='parameters__label'>
-        <span class='parameter__label'>Popularity</span>
+    <li class='card__parameter'>
+        <p class='parameter__label'>Popularity</p>
+        <p class='parameter__value'>{{popularity}}</p>
     </li>
-    <li class='parameters__label'>
-        <span class='parameter__label'>Original Title</span>
+    <li class='card__parameter card__parameter--title'>
+        <p class='parameter__label'>Original Title</p>
+        <p class='parameter__value'>{{original_title}}</p>
     </li>
-    <li class='parameters__label'>
-        <span class='parameter__label'>Genre</span>
-    </li>
-    </ul>
-    <ul class='parameters__values'>
-    <li class='parameters__value'>
-        <span class='parameter__value parameter__value--vote'>{{vote_average}}</span>
-        <spam class='parameter__value'>/</spam>
-        <span class='parameter__value'>{{vote_count}}</span>
-    </li>
-    <li class='parameters__value'>
-        <span class='parameter__value'>{{popularity}}</span>
-    </li>
-    <li class='parameters__value'>
-        <span class='parameter__value'>{{original_title}}</span>
-    </li>
-    <li class='parameters__value'>
+    <li class='card__parameter card__parameter--genres'>
+        <p class='parameter__label'>Genre</p>
+        <p class='parameter__value'>
         {{#each genres}}
-        <span class='parameter__value'>{{this.name}}</span>
+        <span>{{this.name}}</span><span class='comma'>,</span>
         {{/each}}
+        </p>
     </li>
-    </ul>
 </ul>
 <details class='mobile-about'>
     <summary class='mobile-about-caption'>About</summary>
@@ -50,7 +39,7 @@
 
 <div class='modal-form__buttons'>
     <button class='btn modal-form__btn btn--active' type='button'>
-        add to watched
+    add to watched
     </button>
     <button class='btn modal-form__btn' type='button'>
     add to queue
