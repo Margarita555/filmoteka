@@ -133,6 +133,8 @@
   border-style: none;
   background: inherit;
   color: #ffffff;
+  font-size: 14px;
+  line-height: 1.14;
 }
 .header__search-form-input::placeholder {
   color: #ffffff;
@@ -148,12 +150,12 @@
   outline: none;
   border-style: none;
 }
-.header__search-error {
+.header__search-error.is-hidden {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
 }
-.header__search-error.is-hidden {
+.header__search-error {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
