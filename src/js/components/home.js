@@ -8,6 +8,22 @@ const api = new API();
 api
   .fetchMovieTrending()
   .then(result => {
+    console.log(result)
+    api
+      .genre()
+        .then(genresList => {
+          console.log(genresList)
+          
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    
+    // result = genresList.map((x) => ({ genre_ids: x.id, name: x.name }))
+    // console.log(result);
+
+
+
     insertPoint.insertAdjacentHTML('beforeend', card(result));
     homeLink.classList.add('active');
     libraryLink.classList.remove('active');
@@ -17,3 +33,7 @@ api
   .catch(err => {
     console.log(err);
   });
+
+
+  
+  

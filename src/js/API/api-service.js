@@ -20,6 +20,14 @@ API.prototype.fetchMovieTrending = async function () {
     console.error(error);
   }
 };
+API.prototype.genre = async function () {
+  try {
+    const response = await axios.get(`/genre/movie/list`);
+    return response.data.genres;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 API.prototype.fetchMovieTrendingData = async function () {
   try {

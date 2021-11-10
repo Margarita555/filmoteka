@@ -10,5 +10,8 @@
    {{/if}}
    <h2 class="test">{{title}}</h1>
    <p class="test">{{release_date}}</p>
+   {{#each genre_ids}}
+   <p>{{this}}</p>
+   {{/each}}
 </li>
 {{/each}}
