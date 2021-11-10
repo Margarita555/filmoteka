@@ -4,6 +4,8 @@ import card from '../../handlebars/cardMovie.hbs';
 const { searchInputRef, searchBtnRef, insertPoint } = getRefs();
 const api = new API();
 
+import { startSpinner, stopSpinner } from './spinner.js';
+
 searchBtnRef.addEventListener('click', onSearchInput);
 
 async function onSearchInput(e) {
@@ -11,26 +13,8 @@ async function onSearchInput(e) {
   insertPoint.innerHTML = '';
   e.preventDefault();
   api._setQuery(searchInputRef.value);
+  startSpinner();
   const results = await api.fetchMovieSearchQuery();
   if (!results.lengths) insertPoint.insertAdjacentHTML('beforeend', card(results));
+  stopSpinner();
 }
-
-
-
-// ===========будь ласка добавте функцію spinner=========
-// ===========нижче код, як працює зі спінером========
-
-// import {startSpinner, stopSpinner} from './spinner.js';
-
-// searchBtnRef.addEventListener('click', onSearchInput);
-
-// async function onSearchInput(e) {
-//   if (!searchInputRef.value.trim()) return;
-//   insertPoint.innerHTML = '';
-//   e.preventDefault();
-//   api._setQuery(searchInputRef.value);
-//   startSpinner();
-//   const results = await api.fetchMovieSearchQuery();
-//   if (!results.lengths) insertPoint.insertAdjacentHTML('beforeend', card(results));
-//   stopSpinner();
-// }
