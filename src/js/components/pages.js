@@ -2,9 +2,6 @@ import API from '../API/api-service';
 import imageCardsTemplate from '../../handlebars/cardMovie.hbs';
 import createCardData from './create-card-data';
 import { startSpinner, stopSpinner} from './spinner';
-// import { stopSpinner } from './spinner';
-console.log(startSpinner)
-console.log(stopSpinner)
 import getRefs from '../refs/get-refs';
 const {insertPoint, pageNumbersContainer, nextBtn, prevBtn, firstPageBtn, lastPageBtn, pageEllipsisStart, pageEllipsisFinish, pagesContainer} = getRefs();
 
