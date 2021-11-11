@@ -9,10 +9,7 @@ const api = new API();
 
 async function createMarkup() {
   try {
-    const data = await api.fetchMovieTrending();
-    const result = await data.results;
-
-    const markup = await createCardData(result);
+    const markup = await createCardData();
 
     insertPoint.insertAdjacentHTML('beforeend', card(markup));
 
