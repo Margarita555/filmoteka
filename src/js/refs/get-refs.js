@@ -27,5 +27,9 @@ export default function getRefs() {
     pageEllipsisFinish: document.querySelector('.page__ellipsis--finish'),
     // btnAddWatched: document.querySelector('#btn-add-watched'),
     // btnAddQueue: document.querySelector('#add-to-queue'),
+    pagesContainer: document.querySelector('.page__container'),
+    pageThree: document.querySelector('.page__number--three'),
+    pageFour: document.querySelector('.page__number--four'),
+    pageFive: document.querySelector('.page__number--five'),
   };
 }
