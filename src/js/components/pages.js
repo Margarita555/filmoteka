@@ -16,9 +16,13 @@ lastPageBtn.addEventListener('click', onLastPageBtnClick);
 pagesContainer.addEventListener('click', smoothScroll);
 
 async function getTotalPages() {
-    await api.fetchMovieTrending().then(data => {
+     try {
+  await api.fetchMovieTrending().then(data => {
     totalPages = data.total_pages
     })
+  } catch (error) {
+    console.error(error);
+  }
 
     return
 }
