@@ -8,3 +8,5 @@ import API from './js/API/api-service';
 
 const api = new API();
 import './js/components/footer-modal.js';
+import { addBackToTop } from 'vanilla-back-to-top';
+addBackToTop();
