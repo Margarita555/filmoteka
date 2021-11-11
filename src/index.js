@@ -7,3 +7,4 @@ import './js/components/library';
 import API from './js/API/api-service';
 
 const api = new API();
+import './js/components/footer-modal.js';

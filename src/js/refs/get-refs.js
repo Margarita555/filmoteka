@@ -25,5 +25,14 @@ export default function getRefs() {
     lastPageBtn: document.querySelector('.page__btn--last'),
     pageEllipsisStart: document.querySelector('.page__ellipsis--start'),
     pageEllipsisFinish: document.querySelector('.page__ellipsis--finish'),
+    pagesContainer: document.querySelector('.page__container'),
+    pageThree: document.querySelector('.page__number--three'),
+    pageFour: document.querySelector('.page__number--four'),
+    pageFive: document.querySelector('.page__number--five'),
+    openFooterModalBtn: document.querySelector('[footer-modal-open]'),
+    closeFooterModalBtn: document.querySelector('[footer-modal-close]'),
+    footerModal: document.querySelector('[footer-modal]'),
+    backdropRef: document.querySelector('.backdrop'),
+
   };
 }
