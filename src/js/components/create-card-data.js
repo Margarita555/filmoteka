@@ -7,31 +7,33 @@ async function createCardData(result) {
 
   let cardList = [];
 
-  cardList = result.map(card => {
-    const genreList = [];
+  cardList = result.map(
+    ({ genre_ids, release_date, backdrop_path, poster_path, original_title, vote_average, id }) => {
+      const genreList = [];
 
-    if (card.genre_ids) {
-      card.genre_ids.forEach(id => {
-        const genre = genres.find(genre => genre.id === id);
+      if (genre_ids) {
+        genre_ids.forEach(id => {
+          const genre = genres.find(genre => genre.id === id);
 
-        if (genre && genreList.length <= 3) {
-          genreList.push(genre.name);
-        }
-      });
-    }
+          if (genre && genreList.length <= 3) {
+            genreList.push(genre.name);
+          }
+        });
+      }
 
-    const date = card.release_date ? card.release_date.slice(0, 4) : '';
+      const date = release_date ? release_date.slice(0, 4) : '';
 
-    return {
-      backdrop_path: card.backdrop_path,
-      poster_path: card.poster_path,
-      original_title: card.original_title,
-      vote_average: card.vote_average,
-      release_date: date,
-      id: card.id,
-      genres: genreList,
-    };
-  });
+      return {
+        backdrop_path,
+        poster_path,
+        original_title,
+        vote_average,
+        release_date: date,
+        id,
+        genres: genreList,
+      };
+    },
+  );
   return cardList;
 }
 
