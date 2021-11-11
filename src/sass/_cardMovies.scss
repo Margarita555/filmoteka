@@ -1,10 +1,43 @@
-.vote-average__position {
-    position: relative;
+.hero__item{
+    display: flex;
+    flex-direction: column;
 }
-
-.parameter__position {
-    position: absolute;
-    bottom: 0px;
-    right: 0;
-    margin-right: 0px;
+.hero__imagebox{
+    display: flex;
+    margin-bottom: 10px;
+    
+}
+.hero__image{
+    border-radius: 5px;
+}
+.hero__title{
+    color: var(--black-text-color);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    text-transform: uppercase;
+}
+.hero__descriptionbox{
+    display: flex;
+}
+.hero__genres, .hero__year{
+    color: var(--accent-color);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+}
+.hero__year{
+    margin-left: 5px;
+}
+.hero__year::before{
+    position:relative;
+    right: 2px;
+    bottom: 0;
+    float: left;
+    content: "";
+    width: 2px; /* Line width */
+    background-color: var(--accent-color);
+    height: 12px; 
 }

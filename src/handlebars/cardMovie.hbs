@@ -1,20 +1,22 @@
 
 {{#each this}}
-<li class="test" data-id='{{id}}'>
-   <div class="vote-average__position">
+<li class="hero__item" data-id='{{id}}'>
+   <div class="hero__imagebox">
    {{#if poster_path}}
-   <img class="test" src="https://image.tmdb.org/t/p/w400{{poster_path}}" alt="{{original_title}}"
+   <img class="hero__image" src="https://image.tmdb.org/t/p/w400{{poster_path}}" alt="{{original_title}}"
       data-type="{{media_type}}" data-src="{{id}}">
    {{else}}
-   <img class="test" src="https://kinomaiak.ru/wp-content/uploads/2018/02/noposter.png" data-src="{{id}}"
+   <img class="hero__image" src="https://kinomaiak.ru/wp-content/uploads/2018/02/noposter.png" data-src="{{id}}"
       height="422" />
             {{/if}}
-   <span class="parameter__value--avg parameter__value parameter__position">{{vote_average}}</span>
+   {{!-- <span class="parameter__value--avg parameter__value parameter__position">{{vote_average}}</span> --}}
    </div>
-   <h2 class="test">{{title}}</h1>
-      <p class="test">{{release_date}}</p>
+   <h2 class="hero__title">{{original_title}}</h1>
+   <div class="hero__descriptionbox">
       {{#each genres}}
-      <p>{{this}}</p>
+      <p class="hero__genres">{{this}}, </p>
       {{/each}}
+      <p class="hero__year">{{release_date}}</p>
+   </div>
 </li>
 {{/each}}
