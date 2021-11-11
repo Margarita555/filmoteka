@@ -31,5 +31,9 @@ export default function getRefs() {
     pageThree: document.querySelector('.page__number--three'),
     pageFour: document.querySelector('.page__number--four'),
     pageFive: document.querySelector('.page__number--five'),
+    openFooterModalBtn: document.querySelector('[footer-modal-open]'),
+    closeFooterModalBtn: document.querySelector('[footer-modal-close]'),
+    footerModal: document.querySelector('[footer-modal]'),
+    backdropRef: document.querySelector('.backdrop'),
   };
 }
