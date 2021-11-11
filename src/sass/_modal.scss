@@ -5,6 +5,7 @@
   position: fixed;
   top: 0;
   left: 0;
+  overflow-y: auto;
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--modal-transition-delay) var(--default-transition-timing);
@@ -186,7 +187,8 @@
 }
 .card__about {
   margin-bottom: 20px;
-
+  max-height: 262px;
+  overflow-y: auto;
   font-weight: 500;
   font-size: 12px;
   line-height: 1.67;
