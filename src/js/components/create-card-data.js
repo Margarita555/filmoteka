@@ -2,9 +2,7 @@ import API from '../API/api-service';
 
 const api = new API();
 
-async function createCardData() {
-  const data = await api.fetchMovieTrending();
-  const result = await data.results;
+async function createCardData(result) {
   const genres = await api.fetchMovieGenre();
 
   let cardList = [];
