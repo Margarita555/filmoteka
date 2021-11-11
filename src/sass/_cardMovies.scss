@@ -41,3 +41,13 @@
     background-color: var(--accent-color);
     height: 12px; 
 }
+.vote-average__position {
+    position: relative;
+}
+
+.parameter__position {
+    position: absolute;
+    bottom: 0px;
+    right: 0;
+    margin-right: 0px;
+}
