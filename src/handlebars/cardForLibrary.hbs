@@ -1,0 +1,17 @@
+
+{{#each this}}
+<li class="test" data-id='{{id}}'>
+    <div class="vote-average__position">
+        
+        <img class="test" src="https://image.tmdb.org/t/p/w400{{poster_path}}" alt="{{original_title}}"
+            data-type="{{media_type}}" data-src="{{id}}">
+        
+        <span class="parameter__value--avg parameter__value parameter__position">{{vote_average}}</span>
+    </div>
+    <h2 class="test">{{title}}</h1>
+        <p class="test">{{release_date}}</p>
+        {{#each genres}}
+        <p>{{this.name}}</p>
+        {{/each}}
+</li>
+{{/each}}
