@@ -15,15 +15,19 @@ const API = function () {
 API.prototype.fetchMovieTrending = async function () {
   try {
     const response = await axios.get(`/trending/movie/day?page=${this._page}`);
-    return response.data.results;
+    return response.data;
   } catch (error) {
     console.error(error);
   }
 };
-API.prototype.genre = async function () {
+
+// Фетч жанров
+API.prototype.fetchMovieGenre = async function () {
   try {
-    const response = await axios.get(`/genre/movie/list`);
-    return response.data.genres;
+    const response = await axios.get('/genre/movie/list?');
+    const data = await response.data;
+    const result = await data.genres;
+    return result;
   } catch (error) {
     console.error(error);
   }
@@ -38,15 +42,15 @@ API.prototype.fetchMovieTrendingData = async function () {
   }
 };
 
-// Фетч популярных фильмов
-// API.prototype.fetchMoviePopular = async function () {
-//   try {
-//     const response = await axios.get(`/movie/popular?`);
-//     return response.data.results;
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
+//Фетч популярных фильмов
+API.prototype.fetchMoviePopular = async function () {
+  try {
+    const response = await axios.get(`/movie/popular?`);
+    return response.data.results;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 // Фетч по поисковому запросу
 API.prototype.fetchMovieSearchQuery = async function () {
@@ -100,41 +104,3 @@ API.prototype._decrementPage = function () {
 };
 
 export default API;
-// export default {
-//   // Фетч полной информации о трендах
-//   async fetchMovieTrending() {
-//     try {
-//       const response = await axios.get('/trending/movie/day?');
-//       return response.data.results;
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   },
-//   // Фетч популярных фильмов
-//   async fetchMoviePopular(page) {
-//     try {
-//       const response = await axios.get(`/movie/popular?page=${page}`);
-//       return response.data.results;
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   },
-//   // Фетч по поисковому запросу
-//   async fetchMovieSearchQuery(searchQuery) {
-//     try {
-//       const response = await axios.get(`/search/movie?&query=${searchQuery}`);
-//       return response.data.results;
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   },
-//   // Фетч описания фильма по его ID
-//   async fetchMovieDescription(movieId) {
-//     try {
-//       const response = await axios.get(`/movie/${movieId}?`);
-//       return response.data;
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   },
-// };
