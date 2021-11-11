@@ -19,6 +19,7 @@ async function onSearchInput(e) {
   if (!results.length) searchErr(true);
   insertPoint.insertAdjacentHTML('beforeend', card(results));
   stopSpinner();
+  pagesContainer.innerHTML = '';
 }
 
 function initialReset() {
