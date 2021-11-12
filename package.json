@@ -26,7 +26,6 @@
     "sass": "^1.32.8"
   },
   "dependencies": {
-    "axios": "^0.24.0",
-    "vanilla-back-to-top": "^7.2.1"
+    "axios": "^0.24.0"
   }
 }
