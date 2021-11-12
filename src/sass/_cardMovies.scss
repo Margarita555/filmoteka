@@ -43,6 +43,9 @@
     background-color: var(--accent-color);
     height: 11px; 
 }
+.symbol:not(:last-child) {
+    margin-right: 3px;
+}
 .symbol:last-child{
     display: none;
 }
