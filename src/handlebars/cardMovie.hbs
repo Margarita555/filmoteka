@@ -16,8 +16,13 @@
       <ul class="descriptionbox__list">
          <li class="descriptionbox__item">
             {{#each genres}}
+            {{#if this.name}}
+               <span class="hero__genres">{{this.name}}</span>
+               <span class="symbol">,</span>
+               {{else}}
                <span class="hero__genres">{{this}}</span>
                <span class="symbol">,</span>
+               {{/if}}
             {{/each}}
          </li>
          <li class="descriptionbox__item">
