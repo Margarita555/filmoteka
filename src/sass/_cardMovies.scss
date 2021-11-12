@@ -18,10 +18,10 @@
     line-height: 16px;
     text-transform: uppercase;
 }
-.hero__descriptionbox{
+.hero__descriptionbox,.descriptionbox__list,.descriptionbox__item{
     display: flex;
 }
-.hero__genres, .hero__year{
+.hero__genres, .hero__year,.symbol{
     color: var(--accent-color);
     font-style: normal;
     font-weight: 500;
@@ -29,17 +29,22 @@
     line-height: 16px;
 }
 .hero__year{
-    margin-left: 5px;
+    display: flex;
+    margin-left: 7px;
+    align-items: center;
 }
 .hero__year::before{
     position:relative;
-    right: 2px;
+    right: 3px;
     bottom: 0;
     float: left;
     content: "";
-    width: 2px; /* Line width */
+    width: 1px; 
     background-color: var(--accent-color);
-    height: 12px; 
+    height: 11px; 
+}
+.symbol:last-child{
+    display: none;
 }
 .vote-average__position {
     position: relative;
