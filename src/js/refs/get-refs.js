@@ -34,5 +34,6 @@ export default function getRefs() {
     footerModal: document.querySelector('[footer-modal]'),
     backdropRef: document.querySelector('.backdrop'),
     searchForm: document.querySelector('.js-search-form'),
+    backToTopRef: document.querySelector('.back-to-top'),
   };
 }
