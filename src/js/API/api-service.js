@@ -49,7 +49,7 @@ API.prototype.fetchMovieSearchQuery = async function () {
     const response = await axios.get(
       `/search/movie?&query=${this._searchQuery}&page=${this._page}`,
     );
-    return response.data.results;
+    return response.data;
   } catch (error) {
     console.error(error);
   }
@@ -82,16 +82,6 @@ API.prototype._setPage = function (newPage) {
 // сбрас страниц
 API.prototype._resetPage = function () {
   this._page = 1;
-};
-
-//увеличить значение страницы на еденицу
-API.prototype._incrementPage = function () {
-  this._page += 1;
-};
-
-//уменьшить значение страницы на еденицу
-API.prototype._decrementPage = function () {
-  this._page -= 1;
 };
 
 export default API;

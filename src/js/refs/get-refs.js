@@ -33,6 +33,6 @@ export default function getRefs() {
     closeFooterModalBtn: document.querySelector('[footer-modal-close]'),
     footerModal: document.querySelector('[footer-modal]'),
     backdropRef: document.querySelector('.backdrop'),
-
+    searchForm: document.querySelector('.js-search-form'),
   };
 }

@@ -2,24 +2,39 @@ import getRefs from '../refs/get-refs';
 import API from '../API/api-service';
 import searchErr from './search-error';
 import card from '../../handlebars/cardMovie.hbs';
-const { searchInputRef, searchBtnRef, insertPoint } = getRefs();
+const { searchForm, insertPoint } = getRefs();
 const api = new API();
 
 import { startSpinner, stopSpinner } from './spinner.js';
+import createCardData from './create-card-data';
 
-searchBtnRef.addEventListener('click', onSearchInput);
+searchForm.addEventListener('submit', onSearchInput);
 
 async function onSearchInput(e) {
-  if (!searchInputRef.value.trim()) return;
-  initialReset();
   e.preventDefault();
-  api._setQuery(searchInputRef.value);
-  startSpinner();
-  const results = await api.fetchMovieSearchQuery();
-  if (!results.length) searchErr(true);
-  insertPoint.insertAdjacentHTML('beforeend', card(results));
-  stopSpinner();
-  pagesContainer.innerHTML = '';
+
+  const value = e.currentTarget.elements.query.value;
+  if (!value.trim()) return;
+  initialReset();
+
+  e.currentTarget.reset();
+  try {
+    api._setQuery(value);
+
+    startSpinner();
+
+    const data = await api.fetchMovieSearchQuery();
+    const result = await data.results;
+
+    const markup = await createCardData(result);
+
+    if (!result.length) searchErr(true);
+
+    insertPoint.insertAdjacentHTML('beforeend', card(markup));
+    stopSpinner();
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 function initialReset() {
