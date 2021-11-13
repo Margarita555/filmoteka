@@ -3,8 +3,7 @@
 <li class="hero__item" data-id='{{id}}'>
    <div class="hero__imagebox vote-average__position">
 
-   <img class="hero__image" src={{poster_path}} alt="{{title}}"
-      data-type="{{media_type}}" data-src="{{id}}">
+   <img class="hero__image" src={{poster}} alt="{{title}}" data-src="{{id}}">
  
    <span class="parameter__value--avg parameter__value parameter__position">{{vote_average}}</span>
    </div>
@@ -12,20 +11,17 @@
    <div class="hero__descriptionbox">
       <ul class="descriptionbox__list">
          <li class="descriptionbox__item">
-            {{#each genres}}
-            {{#if this.name}}
-               <span class="hero__genres">{{this.name}}</span>
-               <span class="symbol">,</span>
-               {{else}}
+            {{#each genres_type}}
                <span class="hero__genres">{{this}}</span>
                <span class="symbol">,</span>
-               {{/if}}
             {{/each}}
          </li>
          <li class="descriptionbox__item">
-            <p class="hero__year">{{release_date}}</p>
+            <p class="hero__year">{{date}}</p>
          </li>
       </ul>
    </div>
 </li>
 {{/each}}
+
+
