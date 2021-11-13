@@ -26,10 +26,8 @@ async function onClickOnCard(e) {
       modalRef.style.backgroundImage = `linear-gradient(to right,
       rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.8)),
       url("${postersURL + result.backdrop_path}")`;
-    else {
-      modalRef.style.backgroundColor = 'var(--white-text-color';
-      modalRef.style.backgroundImage = 'url()';
-    }
+    else modalRef.style.backgroundImage = 'url()';
+    
     addItemToLocalStorage(result);
 
     const btnAddWatched = document.querySelector('#btn-add-watched');
