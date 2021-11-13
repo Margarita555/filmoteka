@@ -11,7 +11,16 @@
 .hero__image {
   border-radius: 5px;
 }
-
+@media screen and (min-width: 768px) {
+  .hero__imagebox {
+    width: 294px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .hero__imagebox {
+    width: 274px;
+  }
+}
 .hero__title {
   color: var(--black-text-color);
   font-style: normal;
