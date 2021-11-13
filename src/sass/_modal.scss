@@ -30,6 +30,7 @@
   width: 280px;
   background-color: var(--white-text-color);
   @media screen and (min-width: 768px) and (max-width: 1023px) {
+    margin: auto;;
     width: 618px;
     height: 562px;
   }
