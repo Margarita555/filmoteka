@@ -8,6 +8,7 @@ export default function getRefs() {
     homeLink: document.querySelector('#home-link'),
     libraryLink: document.querySelector('#library-link'),
     //MODAL
+    modalRef: document.querySelector('.modal-form'),
     modalСardRef: document.querySelector('.modal-form__card'),
     lightboxRef: document.querySelector('.lightbox'),
     clsBtnRef: document.querySelector('.modal-form__close-btn'),
