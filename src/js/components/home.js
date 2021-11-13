@@ -1,7 +1,7 @@
 import API from '../API/api-service';
 import getRefs from '../refs/get-refs';
 import card from '../../handlebars/cardMovie.hbs';
-import createCardData from './create-card-data';
+import createCardData from '../data/create-card-data';
 import { startSpinner, stopSpinner } from './spinner.js';
 
 const { insertPoint, homeLink, libraryLink, headerForm, headerButton } = getRefs();

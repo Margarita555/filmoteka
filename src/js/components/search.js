@@ -6,7 +6,7 @@ const { searchForm, insertPoint } = getRefs();
 const api = new API();
 
 import { startSpinner, stopSpinner } from './spinner.js';
-import createCardData from './create-card-data';
+import createCardData from '../data/create-card-data';
 
 searchForm.addEventListener('submit', onSearchInput);
 
