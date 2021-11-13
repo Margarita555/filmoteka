@@ -1,23 +1,14 @@
 import API from '../API/api-service';
 import imageCardsTemplate from '../../handlebars/cardMovie.hbs';
 import createCardData from '../data/create-card-data';
-import { startSpinner, stopSpinner } from './spinner';
+import { startSpinner, stopSpinner} from './spinner';
 import getRefs from '../refs/get-refs';
-const {
-  header,
-  insertPoint,
-  pageNumbersContainer,
-  nextBtn,
-  prevBtn,
-  firstPageBtn,
-  lastPageBtn,
-  pageEllipsisStart,
-  pageEllipsisFinish,
-  pagesContainer,
-} = getRefs();
+const { insertPoint, pageNumbersContainer, nextBtn, prevBtn, firstPageBtn, lastPageBtn, pageEllipsisStart, pageEllipsisFinish, pagesContainer, header } = getRefs();
 
+
+export default function renderPagination(request, totalPages, searchInputValue) {
+pageNumbersContainer.innerHTML = ''
 const api = new API();
-let totalPages;
 
 pageNumbersContainer.addEventListener('click', onPageNumberClick);
 nextBtn.addEventListener('click', onNextBtnClick);
@@ -26,165 +17,212 @@ firstPageBtn.addEventListener('click', onFirstPageBtnClick);
 lastPageBtn.addEventListener('click', onLastPageBtnClick);
 pagesContainer.addEventListener('click', smoothScroll);
 
-async function getTotalPages() {
-  try {
-    await api.fetchMovieTrending().then(data => {
-      totalPages = data.total_pages;
-    });
-  } catch (error) {
-    console.error(error);
-  }
-
-  return;
-}
-getTotalPages();
-
-function smoothScroll(e) {
+function smoothScroll() {
   setTimeout(() => {
     header.scrollIntoView({
-      behavior: 'smooth',
+        behavior: 'smooth'
     });
-  }, 500);
+  },500)
+} 
+
+let pagesInView = 5
+const totalPagesArray = [];
+  let markupArray = []
+  
+  function getTotalPages() {
+    for (let i = 1; i <= totalPages; i += 1){
+    totalPagesArray.push(i)
+    }
+    const pagesMarkup = totalPagesArray.map(page => {
+      return `<div class="page__number page__block">${page}</div>`
+    });
+    markupArray = pagesMarkup
+    const pagesMarkupArray = [...pagesMarkup]
+    pagesMarkupArray.splice(5, totalPages - 5)
+    pageNumbersContainer.insertAdjacentHTML('beforeend', pagesMarkupArray.join(''));
+    pageNumbersContainer.firstElementChild.classList.add('page__number--active');
+    if (totalPages < pagesInView) {
+      nextBtn.classList.add('page__hidden');
+      prevBtn.classList.add('page__hidden');
+      lastPageBtn.classList.add('page__hidden');
+      pageEllipsisFinish.classList.add('page__hidden');
+    }
+    return
 }
+getTotalPages()
 
 function getActivePages() {
   let allPages = document.getElementsByClassName('page__number');
   const currentActivePage = document.querySelector('.page__number--active');
-  const allPagesArray = Array.from(allPages);
+  let allPagesArray = Array.from(allPages);
   return {
     currentActivePage: currentActivePage,
     currentNumber: Number(currentActivePage.innerText),
     allPagesArray: allPagesArray,
-    middlePageIndex: Math.floor(allPagesArray.length / 2),
   };
 }
 
 function onPageNumberClick(e) {
+  const { currentActivePage, allPagesArray } = getActivePages(e);
   const pageNumber = Number(e.target.innerText);
-
-  const { currentActivePage, allPagesArray, middlePageIndex } = getActivePages(e);
-
   currentActivePage.classList.remove('page__number--active');
-  if (pageNumber <= middlePageIndex) {
-    e.target.classList.add('page__number--active');
-  } else if (pageNumber > middlePageIndex && pageNumber < totalPages - 1) {
-    allPagesArray[middlePageIndex].classList.add('page__number--active');
-    const middleElemNumber = Number(allPagesArray[middlePageIndex].innerText);
-
-    let pageDifference = pageNumber - middleElemNumber;
-    for (let j = 0; j < allPagesArray.length; j += 1) {
-      let elemValue = Number(allPagesArray[j].innerText);
-      allPagesArray[j].textContent = elemValue + pageDifference;
-    }
-  } else if (pageNumber >= totalPages - 1) {
-    e.target.classList.add('page__number--active');
-  }
-
+  e.target.classList.add('page__number--active');
+  
   setEllipsis(Number(allPagesArray[0].innerText), allPagesArray.length);
-
-  fetchAndInsertFilms(pageNumber);
+  console.log(pageNumber)
+  fetchAndInsertFilms(pageNumber); 
 }
 
 function onNextBtnClick() {
-  const { currentActivePage, currentNumber, allPagesArray, middlePageIndex } = getActivePages();
+  let { currentActivePage, currentNumber, allPagesArray} = getActivePages();
   if (currentNumber === totalPages) {
-    return;
+      return
   }
-  if (allPagesArray[0].innerText == 1000 - (allPagesArray.length - 1)) {
-    let index = allPagesArray.indexOf(currentActivePage);
-    if (currentNumber !== totalPages) {
-      allPagesArray[index].classList.remove('page__number--active');
-      allPagesArray[index + 1].classList.add('page__number--active');
-    }
-  } else {
-    for (let i = 0; i < allPagesArray.length; i += 1) {
-      if (allPagesArray[i] == currentActivePage && i < middlePageIndex) {
-        currentActivePage.classList.remove('page__number--active');
-        allPagesArray[i + 1].classList.add('page__number--active');
-      } else if (
-        allPagesArray.indexOf(currentActivePage) >= middlePageIndex &&
-        Number(allPagesArray[allPagesArray.length - 1].innerText) < 1000
-      ) {
-        allPagesArray[i].textContent++;
+  if (currentNumber % pagesInView === 0) {
+    const insertionsTotal = currentNumber / pagesInView;
 
-        if (currentNumber > totalPages - 3) {
-          currentActivePage.classList.remove('page__number--active');
-          allPagesArray[i + 1].classList.add('page__number--active');
-          return;
-        }
+    const pagesMarkupArray = [...markupArray];
+    const newPagesMarkupArray = pagesMarkupArray.slice(pagesInView * insertionsTotal, pagesInView + pagesInView * insertionsTotal);
+
+    pageNumbersContainer.innerHTML = '';
+    pageNumbersContainer.insertAdjacentHTML('beforeend', newPagesMarkupArray.join(''));
+
+    const newPages = document.querySelectorAll('.page__number');
+    currentActivePage.classList.remove('page__number--active');
+    newPages[0].classList.add('page__number--active');
+    setFirstPageBtn(newPages);
+    setEllipsis(Number(newPages[0].innerText), Number(newPages[pagesInView -1].innerText));
+    
+    if (Number(newPages[pagesInView - 1].innerText) >= totalPages - 20 ) {
+      lastPageBtn.classList.add('page__hidden')
+    } else {
+      lastPageBtn.classList.remove('page__hidden')
+      const lastPageMultiplier = Math.floor(Number((newPages[pagesInView - 1].innerText)) / 20)
+      if (lastPageMultiplier === 0) {
+        lastPageBtn.innerHTML = 20;
+      }
+      else {
+        lastPageBtn.innerHTML = (lastPageMultiplier+1)*20
       }
     }
   }
-
-  setEllipsis(Number(allPagesArray[0].innerText), allPagesArray.length);
-
-  let pageNumber = currentNumber + 1;
-  apiService._setPage(pageNumber);
-  apiService
-    .fetchMovieTrendingData()
-    .then(films => {
-      insertPoint.innerHTML = '';
-      insertPoint.insertAdjacentHTML('beforeend', imageCardsTemplate(films.results));
-    })
-    .catch(err => {
-      console.log(err);
-    });
-}
-
-function onPrevBtnClick() {
-  const { currentActivePage, currentNumber, allPagesArray, middlePageIndex } = getActivePages();
-  if (currentNumber === 1) {
-    return;
+  for (let i = 0; i < pagesInView; i += 1) {
+    if (i === pagesInView - 1) {
+      allPagesArray = [...document.getElementsByClassName('page__number')]
+   }
+    if (allPagesArray[i] == currentActivePage) {
+        currentActivePage.classList.remove('page__number--active');
+        allPagesArray[i + 1].classList.add('page__number--active');
+      }
   }
-
-  if (allPagesArray[0].innerText == 1) {
-    let index = allPagesArray.indexOf(currentActivePage);
-    allPagesArray[index].classList.remove('page__number--active');
-    allPagesArray[index - 1].classList.add('page__number--active');
-  } else if (currentNumber <= totalPages && currentNumber > totalPages - middlePageIndex) {
-    let index = allPagesArray.indexOf(currentActivePage);
-    allPagesArray[index].classList.remove('page__number--active');
-    allPagesArray[index - 1].classList.add('page__number--active');
-  } else {
-    for (let i = 0; i < allPagesArray.length; i += 1) {
-      allPagesArray[i].textContent--;
-    }
-  }
-  setEllipsis(Number(allPagesArray[0].innerText), allPagesArray.length);
-
-  let pageNumber = currentNumber - 1;
+  let pageNumber = currentNumber + 1
+  console.log(pageNumber)
   fetchAndInsertFilms(pageNumber);
 }
 
-function onFirstPageBtnClick() {
-  const { currentActivePage, allPagesArray } = getActivePages();
-  currentActivePage.classList.remove('page__number--active');
-  allPagesArray[0].classList.add('page__number--active');
-  for (let i = 0; i < allPagesArray.length; i += 1) {
-    allPagesArray[i].textContent = i + 1;
-  }
-  setEllipsis(Number(allPagesArray[0].innerText), allPagesArray.length);
+function onPrevBtnClick() {
+  const { currentActivePage, currentNumber, allPagesArray} = getActivePages();
+  if (currentNumber === 1) {
+      return
+    }
+    
+  if ((currentNumber-1) % pagesInView === 0) {
+    const pagesMarkupArray = [...markupArray];
+    const newPagesMarkupArray = pagesMarkupArray.slice(currentNumber - 1 - pagesInView, currentNumber-1);
+    pageNumbersContainer.innerHTML = '';
+    pageNumbersContainer.insertAdjacentHTML('beforeend', newPagesMarkupArray.join(''));
 
-  fetchAndInsertFilms(1);
+    const newPages = document.querySelectorAll('.page__number');
+  
+    currentActivePage.classList.remove('page__number--active');
+    newPages[pagesInView - 1].classList.add('page__number--active');
+    
+    setFirstPageBtn(newPages);
+    setEllipsis(Number(newPages[0].innerText), Number(newPages[pagesInView -1].innerText));
+    if (Number(newPages[0].innerText) >= totalPages - 20 ||Number(newPages[pagesInView-1].innerText) === totalPages - 20) {
+     
+      lastPageBtn.classList.add('page__hidden')
+    } else {
+    
+      lastPageBtn.classList.remove('page__hidden');
+      const lastPageMultiplier = Math.floor(Number((newPages[0].innerText)) / 20)
+      if (Number(newPages[pagesInView - 1].innerText) % 20 === 0) {
+      
+        lastPageBtn.innerHTML = Number(newPages[pagesInView - 1].innerText)+20
+      } else if (lastPageMultiplier === 0) {
+        lastPageBtn.innerHTML = 20;
+      }
+      else {
+        lastPageBtn.innerHTML = (lastPageMultiplier+1)*20
+      }
+    }
+  }
+  for (let i = 1; i < pagesInView; i += 1) {
+    if (allPagesArray[i] == currentActivePage) {
+        currentActivePage.classList.remove('page__number--active');
+        allPagesArray[i -1].classList.add('page__number--active');
+      }
+  }
+  let pageNumber = currentNumber - 1;
+  console.log(pageNumber)
+  fetchAndInsertFilms(pageNumber);
 }
 
-function onLastPageBtnClick() {
-  const { currentActivePage, allPagesArray } = getActivePages();
-
-  currentActivePage.classList.remove('page__number--active');
-  allPagesArray[allPagesArray.length - 1].classList.add('page__number--active');
-  for (let i = 0; i < allPagesArray.length; i += 1) {
-    allPagesArray[i].textContent = i + (totalPages - (allPagesArray.length - 1));
+function onLastPageBtnClick(e) {
+  const { currentActivePage} = getActivePages();
+  
+  const lastPageValue = Number(e.target.innerText);
+  const newValue = lastPageValue + 20;
+  
+  const pagesMarkupArray = [...markupArray];
+  const newPagesMarkupArray = pagesMarkupArray.slice(lastPageValue, pagesInView + lastPageValue);
+  pageNumbersContainer.innerHTML = '';
+  pageNumbersContainer.insertAdjacentHTML('beforeend', newPagesMarkupArray.join(''));
+  const newPages = document.querySelectorAll('.page__number');
+  setFirstPageBtn(newPages);
+setEllipsis(Number(newPages[0].innerText), Number(newPages[pagesInView -1].innerText) );
+  e.target.innerText = newValue;
+  if (newValue === totalPages) {
+    e.target.classList.add('page__hidden')
   }
-  setEllipsis(Number(allPagesArray[0].innerText), allPagesArray.length);
-  fetchAndInsertFilms(totalPages);
+    currentActivePage.classList.remove('page__number--active');
+  
+    newPages[0].classList.add('page__number--active');
+    
+     console.log(lastPageValue)
+   fetchAndInsertFilms(lastPageValue) 
+}
+
+function onFirstPageBtnClick() {
+  const { currentActivePage} = getActivePages();
+  const pagesMarkupArray = [...markupArray];
+    const newPagesMarkupArray = pagesMarkupArray.slice(0, pagesInView);
+    pageNumbersContainer.innerHTML = '';
+    pageNumbersContainer.insertAdjacentHTML('beforeend', newPagesMarkupArray.join(''));
+
+    const newPages = document.querySelectorAll('.page__number');
+    currentActivePage.classList.remove('page__number--active');
+    newPages[0].classList.add('page__number--active');
+    lastPageBtn.innerHTML = 20;
+    setFirstPageBtn(newPages);
+    setEllipsis(Number(newPages[0].innerText), Number(newPages[pagesInView -1].innerText));
+     fetchAndInsertFilms(1) 
+  }
+
+  function setFirstPageBtn(newPages) {
+    if (Number(newPages[0].innerText) > 1 ) {
+    firstPageBtn.classList.remove('page__hidden');
+  }
+  else {
+    firstPageBtn.classList.add('page__hidden');
+  }
 }
 
 function setEllipsis(firstEl, allPagesLength) {
   if (firstEl >= 1 && firstEl < totalPages - allPagesLength + 1) {
     pageEllipsisFinish.classList.remove('page__hidden');
   }
-  if (firstEl > totalPages - allPagesLength) {
+  if (firstEl > totalPages - 20) {
     pageEllipsisFinish.classList.add('page__hidden');
   }
   if (firstEl > 1) {
@@ -200,15 +238,23 @@ async function fetchAndInsertFilms(totalPages) {
   try {
     insertPoint.innerHTML = '';
     api._setPage(totalPages);
-    const data = await api.fetchMovieTrending();
-    console.log(data);
+    api._setQuery(searchInputValue)
+    let data
+    if(request == "searchQuery"){
+      data = await api.fetchMovieSearchQuery();
+    }
+    else if (request == "home") {
+      data = await api.fetchMovieTrending();
+    }
     const result = await data.results;
     insertPoint.innerHTML = '';
     const markup = await createCardData(result);
 
-    insertPoint.insertAdjacentHTML('beforeend', imageCardsTemplate(markup));
+    insertPoint.insertAdjacentHTML('beforeend', imageCardsTemplate(markup))
     stopSpinner();
   } catch (error) {
     console.error(error);
   }
+}
+
 }
