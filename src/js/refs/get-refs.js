@@ -7,10 +7,11 @@ export default function getRefs() {
     header: document.querySelector('#header'),
     homeLink: document.querySelector('#home-link'),
     libraryLink: document.querySelector('#library-link'),
+    //MODAL
     modalСardRef: document.querySelector('.modal-form__card'),
-    overlayRef: document.querySelector('.overlay'),
     lightboxRef: document.querySelector('.lightbox'),
     clsBtnRef: document.querySelector('.modal-form__close-btn'),
+
     btnWatched: document.querySelector('#btn-watched'),
     btnQueue: document.querySelector('#btn-queue'),
     headerForm: document.querySelector('.header__form'),
