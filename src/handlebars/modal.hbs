@@ -1,14 +1,14 @@
 {{#if poster_path}}
   <img
     class='card__image'
-    src='https://image.tmdb.org/t/p/w500{{poster_path}}'
+    src='{{poster_url}}{{poster_path}}'
     alt='{{original_title}}'
     data-type='{{media_type}}'
     data-src='{{id}}'
   />
 {{else}}
   <img
-    class='card__image'
+    class='card__no-image'
     src='https://breaksandbites.files.wordpress.com/2016/11/coming-soon-image.png'
     data-src='{{id}}'
   />
