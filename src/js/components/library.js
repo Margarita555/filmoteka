@@ -1,5 +1,5 @@
 import getRefs from '../refs/get-refs';
-import card from '../../handlebars/cardForLibrary.hbs';
+import card from '../../handlebars/cardMovie.hbs';
 
 const {
   libraryLink,

@@ -17,10 +17,16 @@ async function createModalFilmData(id) {
     genres,
     overview,
     backdrop_path,
+    release_date,
   } = description;
 
   const poster = poster_path ? `https://image.tmdb.org/t/p/w500${poster_path}` : comingSoon;
+
   const backdrop = backdrop_path ? `https://image.tmdb.org/t/p/w500${backdrop_path}` : comingSoon;
+
+  const date = release_date ? release_date.slice(0, 4) : '';
+
+  const genres_type = genres.map(genre => genre.name);
 
   return {
     id,
@@ -29,9 +35,10 @@ async function createModalFilmData(id) {
     vote_average,
     vote_count,
     popularity,
-    genres,
+    genres_type,
     overview,
     backdrop,
+    date,
   };
 }
 

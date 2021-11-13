@@ -10,27 +10,28 @@ async function createCardData(result) {
 
   cardList = result.map(
     ({ genre_ids, release_date, backdrop_path, poster_path, title, vote_average, id }) => {
-      const genreList = [];
+      const genres_type = [];
 
       genre_ids.forEach(id => {
         const genre = genres.find(genre => genre.id === id);
 
-        genreList.push(genre.name);
+        genres_type.push(genre.name);
       });
 
-      if (!genreList.length) genreList.push('Coming soon');
+      if (!genres_type.length) genres_type.push('Coming soon');
 
       const date = release_date ? release_date.slice(0, 4) : '';
       const poster = poster_path ? `https://image.tmdb.org/t/p/w500${poster_path}` : comingSoon;
 
       return {
         backdrop_path,
-        poster_path: poster,
+        poster,
         title,
         vote_average,
-        release_date: date,
+        date,
         id,
-        genres: genreList,
+        genres_type,
+        date,
       };
     },
   );
