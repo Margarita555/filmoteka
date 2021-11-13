@@ -1,18 +1,5 @@
-{{#if poster_path}}
-  <img
-    class='card__image'
-    src='{{poster_url}}{{poster_path}}'
-    alt='{{original_title}}'
-    data-type='{{media_type}}'
-    data-src='{{id}}'
-  />
-{{else}}
-  <img
-    class='card__no-image'
-    src='https://breaksandbites.files.wordpress.com/2016/11/coming-soon-image.png'
-    data-src='{{id}}'
-  />
-{{/if}}
+<img class='card__image' src='{{poster}}' alt='{{title}}' data-src='{{id}}' />
+
 <div class='card__info'>
   <h2 class='card__name'>{{title}}</h2>
   <ul class='card__parameters'>
@@ -28,7 +15,7 @@
     </li>
     <li class='card__parameter card__parameter--title'>
       <p class='parameter__label'>Original Title</p>
-      <p class='parameter__value'>{{original_title}}</p>
+      <p class='parameter__value'>{{title}}</p>
     </li>
     <li class='card__parameter card__parameter--genres'>
       <p class='parameter__label'>Genre</p>

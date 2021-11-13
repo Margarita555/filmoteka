@@ -1,10 +1,8 @@
 import getRefs from '../refs/get-refs';
-import API from '../API/api-service';
-import postersURL from '../API/posters-url';
+import createModalFilm from '../data/create-modal-film-data';
 import modal from '../../handlebars/modal.hbs';
 
 const { insertPoint, modalRef, modalСardRef, lightboxRef, clsBtnRef } = getRefs();
-const api = new API();
 
 let storageWatched = localStorage.getItem('Watched')
   ? JSON.parse(localStorage.getItem('Watched'))
@@ -17,17 +15,17 @@ async function onClickOnCard(e) {
   if (e.target.nodeName !== 'UL') {
     e.preventDefault();
     const imgRef = e.target.parentNode.querySelector('img');
-    api._setId(imgRef.dataset.src);
-    const result = await api.fetchMovieDescription();
-    result.poster_url = postersURL;
+
+    const result = await createModalFilm(imgRef.dataset.src);
+
     modalСardRef.insertAdjacentHTML('beforeend', modal(result));
     lightboxRef.classList.add('is-open');
-    if (result.backdrop_path)
+    if (result.backdrop)
       modalRef.style.backgroundImage = `linear-gradient(to right,
       rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.8)),
-      url("${postersURL + result.backdrop_path}")`;
+      url("${result.backdrop}")`;
     else modalRef.style.backgroundImage = 'url()';
-    
+
     addItemToLocalStorage(result);
 
     const btnAddWatched = document.querySelector('#btn-add-watched');
