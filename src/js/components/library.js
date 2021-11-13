@@ -1,5 +1,5 @@
 import getRefs from '../refs/get-refs';
-import card from '../../handlebars/cardMovie.hbs';
+import card from '../../handlebars/cardForLibrary.hbs';
 
 const {
   libraryLink,
@@ -21,12 +21,11 @@ function openLibrary() {
   headerForm.classList.add('disabled');
   headerButton.classList.remove('disabled');
 }
-  async function watchedStorage() {
+async function watchedStorage() {
   btnQueue.classList.remove('in-active');
   btnWatched.classList.add('in-active');
   insertPoint.innerHTML = '';
   let items = JSON.parse(localStorage.getItem('Watched'));
-  console.log(items);
   insertPoint.insertAdjacentHTML('beforeend', card(items));
 }
 
@@ -35,7 +34,6 @@ function queuedStorage() {
   btnQueue.classList.add('in-active');
   insertPoint.innerHTML = '';
   let items = JSON.parse(localStorage.getItem('Queue'));
-  console.log(items);
   insertPoint.insertAdjacentHTML('beforeend', card(items));
 }
 btnWatched.addEventListener('click', watchedStorage);
