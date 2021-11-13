@@ -1,6 +1,5 @@
 .hero__item {
-  display: flex;
-  flex-direction: column;
+  height: 440px;
 }
 .hero__imagebox {
   display: flex;
@@ -11,7 +10,7 @@
 .hero__image {
   border-radius: 5px;
 }
-@media screen and (min-width: 768px) and (max-width: 1023px) {
+@media screen and (min-width: 768px) {
   .hero__imagebox {
     width: 294px;
   }
