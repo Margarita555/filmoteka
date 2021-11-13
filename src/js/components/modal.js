@@ -18,6 +18,7 @@ async function onClickOnCard(e) {
     const imgRef = e.target.parentNode.querySelector('img');
     api._setId(imgRef.dataset.src);
     const result = await api.fetchMovieDescription();
+    console.log(result);
     modalСardRef.insertAdjacentHTML('beforeend', modal(result));
     lightboxRef.classList.add('is-open');
 
