@@ -19,6 +19,7 @@ async function onClickOnCard(e) {
     const imgRef = e.target.parentNode.querySelector('img');
     api._setId(imgRef.dataset.src);
     const result = await api.fetchMovieDescription();
+    result.poster_url = postersURL;
     modalСardRef.insertAdjacentHTML('beforeend', modal(result));
     lightboxRef.classList.add('is-open');
     if (result.backdrop_path)
