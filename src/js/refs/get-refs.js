@@ -29,9 +29,6 @@ export default function getRefs() {
     pageEllipsisStart: document.querySelector('.page__ellipsis--start'),
     pageEllipsisFinish: document.querySelector('.page__ellipsis--finish'),
     pagesContainer: document.querySelector('.page__container'),
-    pageThree: document.querySelector('.page__number--three'),
-    pageFour: document.querySelector('.page__number--four'),
-    pageFive: document.querySelector('.page__number--five'),
     //FOOTER
     openFooterModalBtn: document.querySelector('[footer-modal-open]'),
     closeFooterModalBtn: document.querySelector('[footer-modal-close]'),

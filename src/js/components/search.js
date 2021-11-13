@@ -2,6 +2,7 @@ import getRefs from '../refs/get-refs';
 import API from '../API/api-service';
 import searchErr from './search-error';
 import card from '../../handlebars/cardMovie.hbs';
+import renderPagination from './pages';
 const { searchForm, insertPoint } = getRefs();
 const api = new API();
 
@@ -31,6 +32,10 @@ async function onSearchInput(e) {
     if (!result.length) searchErr(true);
 
     insertPoint.insertAdjacentHTML('beforeend', card(markup));
+
+    let request = "searchQuery";
+    renderPagination(request, data.total_pages, value);
+
     stopSpinner();
   } catch (error) {
     console.error(error);

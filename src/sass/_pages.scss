@@ -10,9 +10,7 @@
 }
 
 .page__numbers--container {
-
   display: flex;
-  gap: 3px;
 }
 
 .page__block {
@@ -30,16 +28,27 @@
 }
 
 .page__number {
+  display: block;
+  text-align: center;
+  margin: 5px;
   cursor: pointer;
 
-  &:hover,
-  &:focus {
-  color: var(--white-text-color);
-  background-color: var(--accent-color);
-  transition: color, background-color var(--modal-transition-delay) var(--default-transition-timing);
-  border-radius: 5px;
+  &:hover {
+    color: var(--white-text-color);
+    background-color: lighten(#ff6b08, 25%);
+    transition: color,
+      background-color var(--modal-transition-delay) var(--default-transition-timing);
+    border-radius: 5px;
   }
 
+  @media screen and (min-width: 320px) and (max-width: 768px) {
+    width: 35px;
+    margin: 3px;
+  }
+}
+
+.page__number:not(:last-child) {
+  margin-right: 5px;
 }
 
 .page__number--active {
@@ -58,16 +67,20 @@
   margin: 5px;
   cursor: pointer;
 
-  &:hover,
-  &:focus {
-  fill: var(--white-text-color);
-  background-color: var(--accent-color);
-  transition: fill, background-color var(--modal-transition-delay) var(--default-transition-timing);
-  border-radius: 5px;
-  }
+  // &:hover {
+  //   fill: var(--white-text-color);
+  //   background-color: lighten(#ff6b08, 25%);
+  //   transition: fill,
+  //     background-color var(--modal-transition-delay) var(--default-transition-timing);
+  //   border-radius: 5px;
+  // }
 }
 
 .page__ellipsis {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   @media screen and (min-width: 320px) and (max-width: 768px) {
     display: none;
   }
@@ -78,15 +91,18 @@
   background-color: transparent;
   width: 40px;
   height: 40px;
-  font-size: 9px;
   cursor: pointer;
+  color: var(--black-text-color);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
 
-  &:hover,
-  &:focus {
-  color: var(--white-text-color);
-  background-color: var(--accent-color);
-  transition: color, background-color var(--modal-transition-delay) var(--default-transition-timing);
-  border-radius: 5px;
+  &:hover {
+    color: var(--white-text-color);
+    background-color: lighten(#ff6b08, 25%);
+    transition: color,
+      background-color var(--modal-transition-delay) var(--default-transition-timing);
+    border-radius: 5px;
   }
 
   @media screen and (min-width: 320px) and (max-width: 768px) {

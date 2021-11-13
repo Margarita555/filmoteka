@@ -3,6 +3,7 @@ import getRefs from '../refs/get-refs';
 import card from '../../handlebars/cardMovie.hbs';
 import createCardData from '../data/create-card-data';
 import { startSpinner, stopSpinner } from './spinner.js';
+import renderPagination from './pages';
 
 const { insertPoint, homeLink, libraryLink, headerForm, headerButton } = getRefs();
 
@@ -16,6 +17,10 @@ async function createMarkup() {
     const markup = await createCardData(result);
 
     insertPoint.insertAdjacentHTML('beforeend', card(markup));
+
+    let request = "home";
+    renderPagination(request, data.total_pages);
+
     stopSpinner();
     homeLink.classList.add('active');
     libraryLink.classList.remove('active');
