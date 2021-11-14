@@ -1,12 +1,31 @@
 .footer {
-    display: flex;
+   // display: flex;
     margin: auto;
     background-color: #F7F7F7;
+    justify-content: space-between;
+}
+
+.logo-container {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding-top: 10px;
+   margin-bottom: 10px;
+}
+
+.slogan-container {
+    margin-left: 10px;
+}
+.slogan {
+   margin-bottom: 10px;
+   font-size: 14px;
+   line-height: 1.17;
 }
 
 .footer-container {
     //display: flex;
-    margin: 30px auto 30px auto;
+   // margin: 30px auto 30px auto;
+    padding-bottom: 30px;
     font-weight: 400;
     font-size: 14px;
     line-height: 1.17;
@@ -22,29 +41,57 @@ margin-bottom: 10px;
 .footer-container_second-part {
 display: flex;
 align-items: center;
+justify-content: center;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {
     .footer-container{
         display: flex;
         font-size: 16px;
+        margin-right: 40px;
     }
 
     .footer-container_first-part {
         margin-bottom: 0;
         margin-right: 4px;
         }
+    
+        .logo-container {
+            margin-left: 40px;
+        }
 }
 @media screen and (min-width: 1024px){
+    .footer {
+      justify-content: space-evenly;
+    }
+
     .footer-container{
         display: flex;
         font-size: 16px;
+      //  margin-right:260px;
+
     }
     .footer-container_first-part {
         margin-bottom: 0;
         margin-right: 4px;
         }
+
+     .logo-container {
+     //   margin-left: 250px;
+     }
+    
 }
 .footer-container_indent {
     margin-right: 10px;
+}
+
+@media screen and (min-width: 768px){
+    .footer{
+        display: flex;
+    }
+
+    .footer-container{
+        margin-top: 30px;
+
+    }
 }
