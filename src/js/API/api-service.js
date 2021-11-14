@@ -65,6 +65,16 @@ API.prototype.fetchMovieDescription = async function () {
   }
 };
 
+//Фетч для трейлеров
+API.prototype.fetchMovieTrailer = async function () {
+  try {
+    const response = await axios.get(`/movie/${this._movieId}/videos?`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 // записывает новый _searchQuery
 API.prototype._setQuery = function (newQuery) {
   this._searchQuery = newQuery;

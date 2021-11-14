@@ -9,6 +9,3 @@ import './js/components/back-to-top';
 import './js/components/footer-modal.js';
 // import { addBackToTop } from 'vanilla-back-to-top';
 // addBackToTop({ scrollDuration: 500 });
-
-//firebase
-import './js/firebase/firebase';
