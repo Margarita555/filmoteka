@@ -14,7 +14,8 @@ export default function getRefs() {
     //MODAL
     modalRef: document.querySelector('.modal-form'),
     modalСardRef: document.querySelector('.modal-form__card'),
-    lightboxRef: document.querySelector('.lightbox'),
+    overlayRef: document.querySelector('.overlay'),
+    overlayBackgroundRef: document.querySelector('.overlay__bg'),
     clsBtnRef: document.querySelector('.modal-form__close-btn'),
     //HERO
     insertPoint: document.querySelector('.hero__list'),
