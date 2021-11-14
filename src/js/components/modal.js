@@ -2,7 +2,8 @@ import getRefs from '../refs/get-refs';
 import createModalFilm from '../data/create-modal-film-data';
 import modal from '../../handlebars/modal.hbs';
 
-const { insertPoint, modalRef, modalСardRef, lightboxRef, clsBtnRef } = getRefs();
+const { insertPoint, modalRef, modalСardRef, overlayBackgroundRef, overlayRef, clsBtnRef } =
+  getRefs();
 
 let storageWatched = localStorage.getItem('Watched')
   ? JSON.parse(localStorage.getItem('Watched'))
@@ -17,14 +18,10 @@ async function onClickOnCard(e) {
     const imgRef = e.target.parentNode.querySelector('img');
 
     const result = await createModalFilm(imgRef.dataset.src);
-
     modalСardRef.insertAdjacentHTML('beforeend', modal(result));
-    lightboxRef.classList.add('is-open');
-    if (result.backdrop)
-      modalRef.style.backgroundImage = `linear-gradient(to right,
-      rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.8)),
-      url("${result.backdrop}")`;
-    else modalRef.style.backgroundImage = 'url()';
+    overlayBackgroundRef.classList.add('is-open');
+    overlayRef.classList.add('is-open');
+    overlayBackgroundRef.style.backgroundImage = `url("${result.backdrop}")`;
 
     addItemToLocalStorage(result);
 
@@ -34,8 +31,8 @@ async function onClickOnCard(e) {
     btnAddWatched.addEventListener('click', addItemToWatched);
     btnAddQueue.addEventListener('click', addItemToQueue);
     clsBtnRef.addEventListener('click', closeModal);
-    lightboxRef.addEventListener('click', e => {
-      if (e.target === lightboxRef) closeModal();
+    overlayRef.addEventListener('click', e => {
+      if (e.target === overlayRef) closeModal();
     });
     window.addEventListener('keydown', e => {
       if (e.code === 'Escape') closeModal();
@@ -45,9 +42,10 @@ async function onClickOnCard(e) {
 
 function closeModal() {
   modalСardRef.innerHTML = '';
-  lightboxRef.classList.remove('is-open');
+  overlayBackgroundRef.classList.remove('is-open');
+  overlayRef.classList.remove('is-open');
   clsBtnRef.removeEventListener('click', closeModal);
-  lightboxRef.removeEventListener('click', closeModal);
+  overlayRef.removeEventListener('click', closeModal);
   window.removeEventListener('keydown', closeModal);
   localStorage.removeItem('ky');
 }

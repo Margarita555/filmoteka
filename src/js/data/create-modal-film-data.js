@@ -22,7 +22,7 @@ async function createModalFilmData(id) {
 
   const poster = poster_path ? `https://image.tmdb.org/t/p/w500${poster_path}` : comingSoon;
 
-  const backdrop = backdrop_path ? `https://image.tmdb.org/t/p/w500${backdrop_path}` : comingSoon;
+  const backdrop = backdrop_path ? `https://image.tmdb.org/t/p/w500${backdrop_path}` : poster;
 
   const date = release_date ? release_date.slice(0, 4) : '';
 
