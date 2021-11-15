@@ -33,6 +33,8 @@
 }
 .descriptionbox__list {
   display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
 }
 .hero__genres,
 .hero__year,
@@ -49,7 +51,7 @@
 .hero__year::before {
   position: relative;
   right: 3px;
-  bottom: 0;
+  bottom: -2px;
   float: left;
   content: '';
   width: 1px;
