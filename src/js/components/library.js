@@ -1,5 +1,6 @@
 import getRefs from '../refs/get-refs';
 import card from '../../handlebars/cardMovie.hbs';
+import renderPagination from './pages';
 
 const {
   libraryLink,
@@ -10,6 +11,7 @@ const {
   headerForm,
   headerButton,
   insertPoint,
+  pagesContainer,
 } = getRefs();
 
 btnWatched.addEventListener('click', watchedStorage);
@@ -23,6 +25,7 @@ function openLibrary() {
   libraryLink.classList.add('active');
   headerForm.classList.add('disabled');
   headerButton.classList.remove('disabled');
+  pagesContainer.classList.add('page__hidden');
 }
 function watchedStorage() {
   changeStorage('Watched');
@@ -40,4 +43,9 @@ function changeStorage(value) {
   insertPoint.innerHTML = '';
   let items = JSON.parse(localStorage.getItem(value));
   insertPoint.insertAdjacentHTML('beforeend', card(items));
+
+  pagesContainer.classList.remove('page__hidden');
+  let totalPages = items.length > 20 ? (Math.floor(items.length/20)+1) : 1;
+  renderPagination(value, totalPages);
+
 }
