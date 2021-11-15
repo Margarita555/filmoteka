@@ -50,8 +50,9 @@ export default function renderPagination(requestValue, totalPagesNumber, searchV
     nextBtn.classList.add('page__hidden');
     prevBtn.classList.add('page__hidden');
     lastPageBtn.classList.add('page__hidden');
-    pageEllipsisFinish.classList.add('page__hidden');
   }
+  setFirstPageBtn(pagesMarkupArray);
+  setEllipsis(Number(pagesMarkupArray[0].innerText), pagesMarkupArray.length);
   return
 }
 
@@ -222,6 +223,10 @@ function setFirstPageBtn(newPages) {
 }
 
 function setEllipsis(firstEl, allPagesLength) {
+  if (totalPages < pagesInView) {
+    pageEllipsisFinish.classList.add('page__hidden');
+    pageEllipsisStart.classList.add('page__hidden');
+  }
   if (firstEl >= 1 && firstEl < totalPages - allPagesLength + 1) {
     pageEllipsisFinish.classList.remove('page__hidden');
   }
