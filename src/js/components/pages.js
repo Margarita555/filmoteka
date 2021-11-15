@@ -28,14 +28,13 @@ function smoothScroll() {
 }
 
 export default function renderPagination(requestValue, totalPagesNumber, searchValue) {
-    request = requestValue;
-    searchInputValue = searchValue;
-    totalPages = totalPagesNumber;
-  
+  request = requestValue;
+  searchInputValue = searchValue;
+  totalPages = totalPagesNumber;
+  const totalPagesArray = [];
+
   pageNumbersContainer.innerHTML = ''
 
-  const totalPagesArray = [];
-  
   for (let i = 1; i <= totalPages; i += 1){
   totalPagesArray.push(i)
   }
@@ -51,8 +50,9 @@ export default function renderPagination(requestValue, totalPagesNumber, searchV
     nextBtn.classList.add('page__hidden');
     prevBtn.classList.add('page__hidden');
     lastPageBtn.classList.add('page__hidden');
-    pageEllipsisFinish.classList.add('page__hidden');
   }
+  setFirstPageBtn(pagesMarkupArray);
+  setEllipsis(Number(pagesMarkupArray[0].innerText), pagesMarkupArray.length);
   return
 }
 
@@ -223,6 +223,10 @@ function setFirstPageBtn(newPages) {
 }
 
 function setEllipsis(firstEl, allPagesLength) {
+  if (totalPages < pagesInView) {
+    pageEllipsisFinish.classList.add('page__hidden');
+    pageEllipsisStart.classList.add('page__hidden');
+  }
   if (firstEl >= 1 && firstEl < totalPages - allPagesLength + 1) {
     pageEllipsisFinish.classList.remove('page__hidden');
   }
@@ -277,12 +281,6 @@ async function fetchFilms(pageNumber) {
   }
 }
 
-  // async function insertFilms(result) {
-  //   insertPoint.innerHTML = '';
-  //   insertPoint.insertAdjacentHTML('beforeend', imageCardsTemplate(markup))
-  //   stopSpinner();
-  // }
- 
  function getWatchedAndQueuedFilmsMarkup(parsedResult, pageNumber) {
 let result = null
     result = parsedResult.slice(0, 5);

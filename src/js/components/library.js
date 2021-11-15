@@ -28,12 +28,15 @@ function openLibrary() {
   pagesContainer.classList.add('page__hidden');
 }
 function watchedStorage() {
+  pagesContainer.classList.add('page__hidden')
   changeStorage('Watched');
   btnQueue.classList.remove('in-active');
   btnWatched.classList.add('in-active');
+ ;
 }
 
 function queuedStorage() {
+  pagesContainer.classList.add('page__hidden');
   changeStorage('Queue');
   btnWatched.classList.remove('in-active');
   btnQueue.classList.add('in-active');
@@ -43,9 +46,11 @@ function changeStorage(value) {
   insertPoint.innerHTML = '';
   let items = JSON.parse(localStorage.getItem(value));
   insertPoint.insertAdjacentHTML('beforeend', card(items));
-
+  
+  if (items) {
   pagesContainer.classList.remove('page__hidden');
   let totalPages = items.length > 20 ? (Math.floor(items.length/20)+1) : 1;
   renderPagination(value, totalPages);
-
+  }
+  
 }
