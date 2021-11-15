@@ -12,7 +12,10 @@ const {
   insertPoint,
 } = getRefs();
 
+btnWatched.addEventListener('click', watchedStorage);
+btnQueue.addEventListener('click', queuedStorage);
 libraryLink.addEventListener('click', openLibrary);
+
 function openLibrary() {
   insertPoint.innerHTML = '';
   header.classList.replace('header__background-home', 'header__background-library');
@@ -21,20 +24,20 @@ function openLibrary() {
   headerForm.classList.add('disabled');
   headerButton.classList.remove('disabled');
 }
-async function watchedStorage() {
+function watchedStorage() {
+  changeStorage('Watched');
   btnQueue.classList.remove('in-active');
   btnWatched.classList.add('in-active');
-  insertPoint.innerHTML = '';
-  let items = JSON.parse(localStorage.getItem('Watched'));
-  insertPoint.insertAdjacentHTML('beforeend', card(items));
 }
 
 function queuedStorage() {
+  changeStorage('Queue');
   btnWatched.classList.remove('in-active');
   btnQueue.classList.add('in-active');
+}
+
+function changeStorage(value) {
   insertPoint.innerHTML = '';
-  let items = JSON.parse(localStorage.getItem('Queue'));
+  let items = JSON.parse(localStorage.getItem(value));
   insertPoint.insertAdjacentHTML('beforeend', card(items));
 }
-btnWatched.addEventListener('click', watchedStorage);
-btnQueue.addEventListener('click', queuedStorage);
