@@ -5,11 +5,13 @@ import { startSpinner, stopSpinner} from './spinner';
 import getRefs from '../refs/get-refs';
 const { insertPoint, pageNumbersContainer, nextBtn, prevBtn, firstPageBtn, lastPageBtn, pageEllipsisStart, pageEllipsisFinish, pagesContainer, header } = getRefs();
 
-
-export default function renderPagination(request, totalPages, searchInputValue) {
-pageNumbersContainer.innerHTML = ''
 const api = new API();
-
+let request = null
+let searchInputValue = null
+let totalPages = null
+let markupArray = [];
+let pagesInView = 5
+  
 pageNumbersContainer.addEventListener('click', onPageNumberClick);
 nextBtn.addEventListener('click', onNextBtnClick);
 prevBtn.addEventListener('click', onPrevBtnClick);
@@ -23,33 +25,36 @@ function smoothScroll() {
         behavior: 'smooth'
     });
   },500)
-} 
-
-let pagesInView = 5
-const totalPagesArray = [];
-  let markupArray = []
-  
-  function getTotalPages() {
-    for (let i = 1; i <= totalPages; i += 1){
-    totalPagesArray.push(i)
-    }
-    const pagesMarkup = totalPagesArray.map(page => {
-      return `<div class="page__number page__block">${page}</div>`
-    });
-    markupArray = pagesMarkup
-    const pagesMarkupArray = [...pagesMarkup]
-    pagesMarkupArray.splice(5, totalPages - 5)
-    pageNumbersContainer.insertAdjacentHTML('beforeend', pagesMarkupArray.join(''));
-    pageNumbersContainer.firstElementChild.classList.add('page__number--active');
-    if (totalPages < pagesInView) {
-      nextBtn.classList.add('page__hidden');
-      prevBtn.classList.add('page__hidden');
-      lastPageBtn.classList.add('page__hidden');
-      pageEllipsisFinish.classList.add('page__hidden');
-    }
-    return
 }
-getTotalPages()
+
+export default function renderPagination(requestValue, totalPagesNumber, searchValue) {
+    request = requestValue;
+    searchInputValue = searchValue;
+    totalPages = totalPagesNumber;
+  
+  pageNumbersContainer.innerHTML = ''
+
+  const totalPagesArray = [];
+  
+  for (let i = 1; i <= totalPages; i += 1){
+  totalPagesArray.push(i)
+  }
+  const pagesMarkup = totalPagesArray.map(page => {
+    return `<div class="page__number page__block">${page}</div>`
+  });
+  markupArray = pagesMarkup
+  const pagesMarkupArray = [...pagesMarkup]
+  pagesMarkupArray.splice(5, totalPages - 5)
+  pageNumbersContainer.insertAdjacentHTML('beforeend', pagesMarkupArray.join(''));
+  pageNumbersContainer.firstElementChild.classList.add('page__number--active');
+  if (totalPages < pagesInView) {
+    nextBtn.classList.add('page__hidden');
+    prevBtn.classList.add('page__hidden');
+    lastPageBtn.classList.add('page__hidden');
+    pageEllipsisFinish.classList.add('page__hidden');
+  }
+  return
+}
 
 function getActivePages() {
   let allPages = document.getElementsByClassName('page__number');
@@ -70,7 +75,7 @@ function onPageNumberClick(e) {
   
   setEllipsis(Number(allPagesArray[0].innerText), allPagesArray.length);
   console.log(pageNumber)
-  fetchAndInsertFilms(pageNumber); 
+  fetchFilms(pageNumber); 
 }
 
 function onNextBtnClick() {
@@ -117,7 +122,7 @@ function onNextBtnClick() {
   }
   let pageNumber = currentNumber + 1
   console.log(pageNumber)
-  fetchAndInsertFilms(pageNumber);
+  fetchFilms(pageNumber);
 }
 
 function onPrevBtnClick() {
@@ -164,8 +169,7 @@ function onPrevBtnClick() {
       }
   }
   let pageNumber = currentNumber - 1;
-  console.log(pageNumber)
-  fetchAndInsertFilms(pageNumber);
+  fetchFilms(pageNumber);
 }
 
 function onLastPageBtnClick(e) {
@@ -175,7 +179,7 @@ function onLastPageBtnClick(e) {
   const newValue = lastPageValue + 20;
   
   const pagesMarkupArray = [...markupArray];
-  const newPagesMarkupArray = pagesMarkupArray.slice(lastPageValue, pagesInView + lastPageValue);
+  const newPagesMarkupArray = pagesMarkupArray.slice(lastPageValue-1, (pagesInView + lastPageValue)-1);
   pageNumbersContainer.innerHTML = '';
   pageNumbersContainer.insertAdjacentHTML('beforeend', newPagesMarkupArray.join(''));
   const newPages = document.querySelectorAll('.page__number');
@@ -189,8 +193,8 @@ setEllipsis(Number(newPages[0].innerText), Number(newPages[pagesInView -1].inner
   
     newPages[0].classList.add('page__number--active');
     
-     console.log(lastPageValue)
-   fetchAndInsertFilms(lastPageValue) 
+     
+   fetchFilms(lastPageValue) 
 }
 
 function onFirstPageBtnClick() {
@@ -206,10 +210,10 @@ function onFirstPageBtnClick() {
     lastPageBtn.innerHTML = 20;
     setFirstPageBtn(newPages);
     setEllipsis(Number(newPages[0].innerText), Number(newPages[pagesInView -1].innerText));
-     fetchAndInsertFilms(1) 
+     fetchFilms(1) 
   }
 
-  function setFirstPageBtn(newPages) {
+function setFirstPageBtn(newPages) {
     if (Number(newPages[0].innerText) > 1 ) {
     firstPageBtn.classList.remove('page__hidden');
   }
@@ -233,28 +237,64 @@ function setEllipsis(firstEl, allPagesLength) {
   }
 }
 
-async function fetchAndInsertFilms(totalPages) {
+async function fetchFilms(pageNumber) {
   startSpinner();
   try {
-    insertPoint.innerHTML = '';
-    api._setPage(totalPages);
+    
+    api._setPage(pageNumber);
     api._setQuery(searchInputValue)
     let data
+    let markup
+    insertPoint.innerHTML = '';
     if(request == "searchQuery"){
       data = await api.fetchMovieSearchQuery();
+      let result = await data.results;
+      markup = await createCardData(result);
     }
     else if (request == "home") {
       data = await api.fetchMovieTrending();
+      let result = await data.results;
+      markup = await createCardData(result);
     }
-    const result = await data.results;
-    insertPoint.innerHTML = '';
-    const markup = await createCardData(result);
-
-    insertPoint.insertAdjacentHTML('beforeend', imageCardsTemplate(markup))
+    else if (request == 'Watched') {
+    let parsedResult = localStorage.getItem('Watched')
+        ? JSON.parse(localStorage.getItem('Watched')) : [];
+      console.log(parsedResult)
+      insertPoint.innerHTML = '';
+    markup = getWatchedAndQueuedFilmsMarkup(parsedResult, pageNumber);
+    
+    }
+    else if (request == 'Queue') {
+      let parsedResult = localStorage.getItem('Queue') ? JSON.parse(localStorage.getItem('Queue')) : [];
+      markup = getWatchedAndQueuedFilmsMarkup(parsedResult, pageNumber);
+    
+    }
+    
+    insertPoint.insertAdjacentHTML('beforeend', imageCardsTemplate(markup));
     stopSpinner();
   } catch (error) {
     console.error(error);
   }
 }
 
+  // async function insertFilms(result) {
+  //   insertPoint.innerHTML = '';
+  //   insertPoint.insertAdjacentHTML('beforeend', imageCardsTemplate(markup))
+  //   stopSpinner();
+  // }
+ 
+ function getWatchedAndQueuedFilmsMarkup(parsedResult, pageNumber) {
+let result = null
+    result = parsedResult.slice(0, 5);
+if (parsedResult.length <= 20) {
+        result = parsedResult;
+} else if (pageNumber === 1) {
+  result = parsedResult.slice(0, 20);
+} else if ((parsedResult.length - (20 * pageNumber)) > 20) {
+  result = parsedResult.slice((20 * (pageNumber - 1)), 20 * pageNumber)
 }
+else {
+    result = parsedResult.slice((20 * (pageNumber - 1)))
+  }
+   return result
+  }
