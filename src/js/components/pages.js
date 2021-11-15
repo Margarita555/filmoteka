@@ -28,14 +28,13 @@ function smoothScroll() {
 }
 
 export default function renderPagination(requestValue, totalPagesNumber, searchValue) {
-    request = requestValue;
-    searchInputValue = searchValue;
-    totalPages = totalPagesNumber;
-  
+  request = requestValue;
+  searchInputValue = searchValue;
+  totalPages = totalPagesNumber;
+  const totalPagesArray = [];
+
   pageNumbersContainer.innerHTML = ''
 
-  const totalPagesArray = [];
-  
   for (let i = 1; i <= totalPages; i += 1){
   totalPagesArray.push(i)
   }
@@ -277,12 +276,6 @@ async function fetchFilms(pageNumber) {
   }
 }
 
-  // async function insertFilms(result) {
-  //   insertPoint.innerHTML = '';
-  //   insertPoint.insertAdjacentHTML('beforeend', imageCardsTemplate(markup))
-  //   stopSpinner();
-  // }
- 
  function getWatchedAndQueuedFilmsMarkup(parsedResult, pageNumber) {
 let result = null
     result = parsedResult.slice(0, 5);
