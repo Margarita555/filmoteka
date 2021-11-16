@@ -8,13 +8,17 @@
   text-align: center;
   text-transform: uppercase;
   background-color: inherit;
-  transition: background-color var(--modal-transition-delay) var(--default-transition-timing);
+  transition: background-color 200ms var(--default-transition-timing);
   cursor: pointer;
+}
+.btn--active {
+  border: none;
+  background-color: var(--accent-color);
+  color: var(--white-text-color);
 }
 
 .btn:hover {
   border: none;
-  background-color: var(--accent-color);
+  background-color: rgb(255, 107, 8, 0.7);
   color: var(--white-text-color);
-  filter: drop-shadow(0px 8px 43px rgba(255, 107, 1, 0.6));
 }
