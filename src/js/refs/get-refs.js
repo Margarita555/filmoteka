@@ -13,6 +13,7 @@ export default function getRefs() {
     headerButton: document.querySelector('.header__button'),
     switchItem: document.querySelector('.theme-switch__control'),
     selector: document.getElementById('theme-switch-toggle'),
+    themeSwitch: document.querySelector('.theme-switch'),
     bodyContainer: document.body,
     //MODAL
     modalRef: document.querySelector('.modal-form'),
