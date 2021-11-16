@@ -30,6 +30,7 @@ export default function getRefs() {
     pageEllipsisStart: document.querySelector('.page__ellipsis--start'),
     pageEllipsisFinish: document.querySelector('.page__ellipsis--finish'),
     pagesContainer: document.querySelector('.page__container'),
+    mainContainer: document.querySelector('.main'),
     //FOOTER
     openFooterModalBtn: document.querySelector('[footer-modal-open]'),
     closeFooterModalBtn: document.querySelector('[footer-modal-close]'),
