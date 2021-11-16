@@ -11,6 +11,9 @@ export default function getRefs() {
     btnQueue: document.querySelector('#btn-queue'),
     headerForm: document.querySelector('.header__form'),
     headerButton: document.querySelector('.header__button'),
+    switchItem: document.querySelector('.theme-switch__control'),
+    selector: document.getElementById('theme-switch-toggle'),
+    bodyContainer: document.body,
     //MODAL
     modalRef: document.querySelector('.modal-form'),
     modalСardRef: document.querySelector('.modal-form__card'),
