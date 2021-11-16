@@ -30,7 +30,7 @@
     width: 270px;
     height: 1800px;
     padding: 30px;
-    background: #FFFFFF;
+    background: rgba(230, 92, 0, 0.8);
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
 }
@@ -75,10 +75,6 @@
     justify-content: center;
     top: 10px;
     right: 0;
-
-   // &_item:not(:nth-child(4n)) {
-   //     margin-right: 20px;
-  //  }
 
   &_item:not(:last-child) {
        margin-bottom: 20px;
@@ -127,7 +123,6 @@
     height: 200px;
     position: relative;
     perspective: 1000px;
-    border: 1px solid #fff;
   }
 
   .front, .back {
@@ -151,6 +146,10 @@
   }
 
   .back {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
     transform: rotateY(180deg);
   }
 
@@ -179,3 +178,38 @@
       }
     }
     
+   .member-photo {
+     width: 70%;
+     height: 70%;
+     border-radius: 100px;
+   }
+
+   .member-descr {
+     display: flex;
+     flex-wrap: wrap;
+     align-items: baseline;
+     justify-content: center;
+   }
+
+   .member-name {
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 5px;
+    
+  }
+
+  .member-role {
+    font-size: 12px;
+    margin-right: 10px;
+    color: white;
+  }
+
+  .github-link:focus,
+  .github-link:hover {
+    background-color: var(--secondary-bg-color);
+    border-radius: 100%;
+  }
+
+  .qr-code{
+    border-radius: 20%;
+  }
