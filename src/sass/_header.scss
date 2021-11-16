@@ -34,10 +34,10 @@
 }
 .enabled {
   // width: 100%;
-  height: 480px;
+  height: 320px;
 
-  background-image: linear-gradient(to top, rgba(47, 48, 58, 0.4), rgba(47, 48, 58, 0.4)),
-    url('../images/coming-soon.jpg');
+  background-image: linear-gradient(rgb(255, 255, 255, 0.7), rgb(255, 255, 255, 0.9)),
+    url('../images/header/download.jpg');
 
   background-repeat: no-repeat;
   background-size: 100% 100%;
