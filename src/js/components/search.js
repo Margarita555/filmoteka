@@ -29,8 +29,11 @@ async function onSearchInput(e) {
 
     const markup = await createCardData(result);
 
-    if (!result.length) searchErr(true);
-
+    if (!result.length) {
+      searchErr(true);
+      stopSpinner();
+      return;
+    }
     insertPoint.insertAdjacentHTML('beforeend', card(markup));
 
     let request = "searchQuery";
