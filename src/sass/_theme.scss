@@ -11,7 +11,9 @@
   display: flex;
   align-items: center;
 }
-
+.disabled {
+  display: none;
+}
 .theme-switch__icon {
   color: #f7873c;
   height: 24px;

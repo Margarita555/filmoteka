@@ -2,7 +2,7 @@ import getRefs from '../refs/get-refs';
 import createModalFilm from '../data/create-modal-film-data';
 import modal from '../../handlebars/modal.hbs';
 
-const { insertPoint, modalСardRef, overlayBackgroundRef, overlayRef, clsBtnRef } = getRefs();
+const { insertPoint, modalСardRef, overlayBackgroundRef, overlayRef, clsBtnRef, themeSwitch } = getRefs();
 let movieID;
 
 insertPoint.addEventListener('click', onClickOnCard);
@@ -12,6 +12,7 @@ modalСardRef.addEventListener('click', onModalBtnClick);
 async function onClickOnCard(e) {
   if (e.target.nodeName !== 'UL') {
     e.preventDefault();
+    
     //Получаем ID фильма из data-атрибута, делаем запрос по ID на API-сервис
     const imgRef = e.target.parentNode.querySelector('img');
     const result = await createModalFilm(imgRef.dataset.src);
@@ -23,6 +24,7 @@ async function onClickOnCard(e) {
     //Показываем фоновый постер с оверлеем
     overlayBackgroundRef.classList.add('is-open');
     overlayRef.classList.add('is-open');
+    themeSwitch.classList.add('disabled')
     overlayBackgroundRef.style.backgroundImage = `linear-gradient(rgb(255, 255, 255, 0.1), rgb(255, 255, 255, 0.1)), url("${result.backdrop}")`;
     //Проверяем, есть ли текущий фильм в библиотеке, если да - делаем активными соотв. кнопки
     setButtonView(movieID, modalСardRef.querySelector('#btn-add-watched'));
@@ -81,6 +83,7 @@ function setButtonView(movieID, btnRef) {
 
 function closeModal() {
   modalСardRef.innerHTML = '';
+  themeSwitch.classList.remove('disabled')
   overlayBackgroundRef.classList.remove('is-open');
   overlayRef.classList.remove('is-open');
   clsBtnRef.removeEventListener('click', closeModal);
