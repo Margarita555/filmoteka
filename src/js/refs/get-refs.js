@@ -25,6 +25,7 @@ export default function getRefs() {
     insertPoint: document.querySelector('.hero__list'),
     spinnerRef: document.querySelector('.loading__spinner'),
     spinnerDotsRefs: document.querySelector('.loading__dots'),
+    heroTitle: document.querySelectorAll('.hero__title'),
     //PAGES
     pageNumbersContainer: document.querySelector('.page__numbers--container'),
     nextBtn: document.querySelector('.page__btn--next'),
