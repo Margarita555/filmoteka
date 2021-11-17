@@ -48,7 +48,7 @@ function changeStorage(value) {
   insertPoint.insertAdjacentHTML('beforeend', card(items));
   
   if (items) {
-  // pagesContainer.classList.remove('page__hidden');
+
   let totalPages = items.length > 20 ? (Math.floor(items.length/20)+1) : 1;
   renderPagination(value, totalPages);
   }
