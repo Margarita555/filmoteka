@@ -3,7 +3,6 @@ import card from '../../handlebars/cardMovie.hbs';
 import renderPagination from './pages';
 
 const {
-  mainContainer,
   libraryLink,
   homeLink,
   btnWatched,
@@ -27,13 +26,13 @@ function openLibrary() {
   headerForm.classList.add('disabled');
   headerButton.classList.remove('disabled');
   pagesContainer.classList.add('page__hidden');
-  mainContainer.classList.add('enabled');
 }
 function watchedStorage() {
-  pagesContainer.classList.add('page__hidden');
+  pagesContainer.classList.add('page__hidden')
   changeStorage('Watched');
   btnQueue.classList.remove('in-active');
   btnWatched.classList.add('in-active');
+ ;
 }
 
 function queuedStorage() {
@@ -47,10 +46,11 @@ function changeStorage(value) {
   insertPoint.innerHTML = '';
   let items = JSON.parse(localStorage.getItem(value));
   insertPoint.insertAdjacentHTML('beforeend', card(items));
-  mainContainer.classList.remove('enabled');
+  
   if (items) {
-    pagesContainer.classList.remove('page__hidden');
-    let totalPages = items.length > 20 ? Math.floor(items.length / 20) + 1 : 1;
-    renderPagination(value, totalPages);
+  // pagesContainer.classList.remove('page__hidden');
+  let totalPages = items.length > 20 ? (Math.floor(items.length/20)+1) : 1;
+  renderPagination(value, totalPages);
   }
+  
 }
