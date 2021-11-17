@@ -7,6 +7,23 @@ async function createModalFilmData(id) {
   api._setId(id);
 
   const description = await api.fetchMovieDescription();
+  const trailerData = await api.fetchMovieTrailer();
+
+  trailerData.find(trailer => {
+    const OfficialTrailer = 'official trailer';
+    if (trailer.name.toLowerCase() === OfficialTrailer) {
+      // console.log(trailer);
+    }
+  });
+
+  //  <iframe
+  //    width="560"
+  //    height="315"
+  //    src="https://www.youtube.com/embed/Pj0wz7zu3Ms"
+  //    frameborder="0"
+  //    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+  //    allowfullscreen
+  //  ></iframe>;
 
   const {
     poster_path,

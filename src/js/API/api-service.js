@@ -69,7 +69,7 @@ API.prototype.fetchMovieDescription = async function () {
 API.prototype.fetchMovieTrailer = async function () {
   try {
     const response = await axios.get(`/movie/${this._movieId}/videos?`);
-    return response.data;
+    return response.data.results;
   } catch (error) {
     console.error(error);
   }
