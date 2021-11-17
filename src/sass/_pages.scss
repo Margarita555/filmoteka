@@ -45,7 +45,9 @@
     margin: 3px;
   }
 }
-
+.page__number.dark-theme {
+  background-color: var(--secondary-bg-color);
+}
 .page__number:not(:last-child) {
   margin-right: 5px;
 }

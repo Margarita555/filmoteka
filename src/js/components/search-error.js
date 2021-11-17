@@ -2,6 +2,11 @@ import getRefs from '../refs/get-refs';
 const { textError, pagesContainer, firstPageBtn, prevBtn, nextBtn, lastPageBtn } = getRefs();
 
 export default function (isTrue) {
+  firstPageBtn.setAttribute('disabled', isTrue);
+  prevBtn.setAttribute('disabled', isTrue);
+  nextBtn.setAttribute('disabled', isTrue);
+  lastPageBtn.setAttribute('disabled', isTrue);
+
   if (isTrue) {
     textError.classList.remove('is-hidden');
     pagesContainer.style.pointerEvents = 'none';

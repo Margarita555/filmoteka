@@ -11,6 +11,10 @@ export default function getRefs() {
     btnQueue: document.querySelector('#btn-queue'),
     headerForm: document.querySelector('.header__form'),
     headerButton: document.querySelector('.header__button'),
+    switchItem: document.querySelector('.theme-switch__control'),
+    selector: document.getElementById('theme-switch-toggle'),
+    themeSwitch: document.querySelector('.theme-switch'),
+    bodyContainer: document.body,
     //MODAL
     modalRef: document.querySelector('.modal-form'),
     modalСardRef: document.querySelector('.modal-form__card'),
@@ -30,6 +34,7 @@ export default function getRefs() {
     pageEllipsisStart: document.querySelector('.page__ellipsis--start'),
     pageEllipsisFinish: document.querySelector('.page__ellipsis--finish'),
     pagesContainer: document.querySelector('.page__container'),
+    mainContainer: document.querySelector('.main'),
     //FOOTER
     openFooterModalBtn: document.querySelector('[footer-modal-open]'),
     closeFooterModalBtn: document.querySelector('[footer-modal-close]'),

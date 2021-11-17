@@ -1,7 +1,7 @@
 import getRefs from "../refs/get-refs";
 
 (() => {
-  const  { openFooterModalBtn, closeFooterModalBtn, footerModal, backdropRef } = getRefs();
+  const  { openFooterModalBtn, closeFooterModalBtn, footerModal } = getRefs();
  
  
  
@@ -12,11 +12,10 @@ import getRefs from "../refs/get-refs";
    if (e.target == footerModal) {
     footerModal.classList.toggle('is-hidden');
    }
+   if (e.code === 'Escape') {
+    footerModal.classList.toggle('is-hidden');
+   }
   }
-
-  window.addEventListener('keydown', e => {
-    if (e.code === 'Escape') toggleModal();
-  });
 
   function toggleModal () {
     footerModal.classList.toggle('is-hidden');
