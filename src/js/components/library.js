@@ -46,11 +46,13 @@ function queuedStorage() {
 function changeStorage(value) {
   insertPoint.innerHTML = '';
   let items = JSON.parse(localStorage.getItem(value));
+
   insertPoint.insertAdjacentHTML('beforeend', card(items));
   mainContainer.classList.remove('enabled');
   if (items) {
     // pagesContainer.classList.remove('page__hidden');
     let totalPages = items.length > 20 ? Math.floor(items.length / 20) + 1 : 1;
     renderPagination(value, totalPages);
+
   }
 }
