@@ -45,7 +45,8 @@ function queuedStorage() {
 function changeStorage(value) {
   insertPoint.innerHTML = '';
   let items = JSON.parse(localStorage.getItem(value));
-  insertPoint.insertAdjacentHTML('beforeend', card(items));
+  let firstPageItems = items.slice(0, 20);
+  insertPoint.insertAdjacentHTML('beforeend', card(firstPageItems));
   
   if (items) {
   // pagesContainer.classList.remove('page__hidden');
