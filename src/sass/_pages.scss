@@ -21,11 +21,11 @@
   justify-content: center;
   align-items: center;
   font-family: Roboto;
-  color: var(--black-text-color);
+  color: inherit;
   font-weight: 500;
   font-size: 12px;
   line-height: 1.33;
-  background-color: var(--white-text-color);
+  background-color: inherit;
   border-radius: 5%;
 }
 
@@ -47,9 +47,9 @@
     margin: 3px;
   }
 }
-.page__number.dark-theme {
-  background-color: var(--secondary-bg-color);
-}
+// .page__number.dark-theme {
+//   background-color: var(--secondary-bg-color);
+// }
 .page__number:not(:last-child) {
   margin-right: 5px;
 }
@@ -88,11 +88,11 @@
 
 .page__btn--arrow {
   border: none;
-  background-color: var(--white-text-color);
+  background-color: inherit;
   width: 40px;
   height: 40px;
   cursor: pointer;
-  color: var(--black-text-color);
+  color: inherit;
   font-weight: 500;
   font-size: 12px;
   line-height: 1.33;

@@ -22,9 +22,8 @@
   margin-right: 0;
 }
 
-
 .hero__title {
-  color: var(--black-text-color);
+  color: inherit;
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
@@ -64,4 +63,3 @@
 .symbol:last-child {
   display: none;
 }
-
