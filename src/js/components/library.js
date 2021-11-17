@@ -45,14 +45,15 @@ function queuedStorage() {
 
 function changeStorage(value) {
   insertPoint.innerHTML = '';
+  pagesContainer.classList.add('page__hidden');
+
   let items = JSON.parse(localStorage.getItem(value));
   let firstPageItems = items.slice(0, 20);
   insertPoint.insertAdjacentHTML('beforeend', card(firstPageItems));
   mainContainer.classList.remove('enabled');
-  if (items) {
-    // pagesContainer.classList.remove('page__hidden');
+  if (items.length) {
+    pagesContainer.classList.remove('page__hidden');
     let totalPages = items.length > 20 ? Math.floor(items.length / 20) + 1 : 1;
     renderPagination(value, totalPages);
-
   }
 }
