@@ -43,9 +43,8 @@ function changeStorage(value) {
   insertPoint.innerHTML = '';
   let items = JSON.parse(localStorage.getItem(value));
   insertPoint.insertAdjacentHTML('beforeend', card(items));
-
-  pagesContainer.classList.remove('page__hidden');
+  if (items) {
   let totalPages = items.length > 20 ? (Math.floor(items.length/20)+1) : 1;
   renderPagination(value, totalPages);
-
+  }
 }

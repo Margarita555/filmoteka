@@ -28,7 +28,6 @@
 }
 
 .page__number {
-  display: block;
   text-align: center;
   margin: 5px;
   cursor: pointer;
@@ -67,13 +66,9 @@
   margin: 5px;
   cursor: pointer;
 
-  // &:hover {
-  //   fill: var(--white-text-color);
-  //   background-color: lighten(#ff6b08, 25%);
-  //   transition: fill,
-  //     background-color var(--modal-transition-delay) var(--default-transition-timing);
-  //   border-radius: 5px;
-  // }
+  &:hover {
+    background-color: darken(#f7f7f7, 5%);
+  }
 }
 
 .page__ellipsis {
