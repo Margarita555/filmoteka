@@ -46,9 +46,10 @@ img {
 }
 body.light-theme {
   background-color: #fff;
+  color: var(--black-text-color);
 }
 
 body.dark-theme {
   background-color: #333333;
-  color: #fff;
+  color: var(--white-text-color);
 }
