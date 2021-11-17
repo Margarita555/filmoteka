@@ -18,7 +18,6 @@ async function onSearchInput(e) {
   if (!value.trim()) return;
   initialReset();
 
-  e.currentTarget.reset();
   try {
     api._setQuery(value);
 

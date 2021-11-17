@@ -6,7 +6,7 @@ export default function (isTrue) {
   if (isTrue) {
     textError.classList.remove('is-hidden');
     pagesContainer.style.pointerEvents = 'none';
-    pagesContainer.style.opacity = '0.5';
+    pagesContainer.style.opacity = '0';
     return;
   }
   textError.classList.add('is-hidden');
