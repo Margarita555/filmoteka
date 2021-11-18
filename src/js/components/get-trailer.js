@@ -24,7 +24,7 @@ async function getTrailer(id) {
     if (!event.currentTarget.dataset.trailer) return;
 
     if (!trailer) {
-      const popUp = basicLightbox.create(`<img width="560" height="315" src='${unavailable}' />`);
+      const popUp = basicLightbox.create(`<img src='${unavailable}' />`);
       popUp.show();
       return;
     }
