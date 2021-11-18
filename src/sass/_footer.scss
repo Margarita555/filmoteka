@@ -1,8 +1,12 @@
-.footer {
+.footer.light-theme {
   // display: flex;
-  background-color: inherit;
+  background-color: var(--secondary-bg-color);
+  color: var(--footer-text-color);
 }
-
+.footer.dark-theme {
+  background-color: inherit;
+  color: var(--accent-color);
+}
 .logo-container {
   display: flex;
   align-items: center;
@@ -10,7 +14,9 @@
   padding-top: 10px;
   margin-bottom: 10px;
 }
-
+.logo-item {
+  border-radius: 8px;
+}
 .slogan-container {
   margin-left: 10px;
 }
@@ -29,7 +35,6 @@
   line-height: 1.17;
   text-align: center;
   align-items: center;
-  color: inherit;
 }
 
 .footer-container_first-part {
