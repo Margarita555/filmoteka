@@ -28,5 +28,6 @@ function setLocalStorage(evt) {
 
 if (themeInLocal === Theme.DARK) {
   bodyContainer.classList.add(Theme.DARK);
+  footerTheme.classList.add(Theme.DARK);
   selector.checked = true;
 }
