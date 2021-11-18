@@ -24,13 +24,13 @@ async function getTrailer(id) {
     if (!event.currentTarget.dataset.trailer) return;
 
     if (!trailer) {
-      const popUp = basicLightbox.create(`<img width="560" height="315" src='${unavailable}' />`);
+      const popUp = basicLightbox.create(`<img src='${unavailable}' />`);
       popUp.show();
       return;
     }
 
     const popUp = basicLightbox.create(
-      `<iframe width="560" height="315" src='https://www.youtube.com/embed/${trailer.key}'frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`,
+      `<iframe width="560" height="315" style="border: none;" src='https://www.youtube.com/embed/${trailer.key}' allow="fullscreen"></iframe>`,
     );
     popUp.show();
   });
