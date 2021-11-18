@@ -1,24 +1,37 @@
 import getRefs from '../refs/get-refs';
 import createModalFilm from '../data/create-modal-film-data';
 import modal from '../../handlebars/modal.hbs';
+import getTrailer from './get-trailer';
 //firesase connect
-import { initializeApp } from "firebase/app";
-import { getDatabase,ref, push,get,set, child,onValue, update, remove } from "firebase/database";
+import { initializeApp } from 'firebase/app';
+import {
+  getDatabase,
+  ref,
+  push,
+  get,
+  set,
+  child,
+  onValue,
+  update,
+  remove,
+} from 'firebase/database';
 const firebaseConfig = {
-  apiKey: "AIzaSyDz5m2g3hqCF15W-uFl0vbqjJ6T2kankW4",
-  authDomain: "js-project-of-group-12-579b9.firebaseapp.com",
-  databaseURL: "https://js-project-of-group-12-579b9-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "js-project-of-group-12-579b9",
-  storageBucket: "js-project-of-group-12-579b9.appspot.com",
-  messagingSenderId: "785273017337",
-  appId: "1:785273017337:web:4779ed9ab176caf238a328",
-  measurementId: "G-7QSLF24SX3"
+  apiKey: 'AIzaSyDz5m2g3hqCF15W-uFl0vbqjJ6T2kankW4',
+  authDomain: 'js-project-of-group-12-579b9.firebaseapp.com',
+  databaseURL:
+    'https://js-project-of-group-12-579b9-default-rtdb.europe-west1.firebasedatabase.app',
+  projectId: 'js-project-of-group-12-579b9',
+  storageBucket: 'js-project-of-group-12-579b9.appspot.com',
+  messagingSenderId: '785273017337',
+  appId: '1:785273017337:web:4779ed9ab176caf238a328',
+  measurementId: 'G-7QSLF24SX3',
 };
 const app = initializeApp(firebaseConfig);
-const db = getDatabase()
-//firebase 
+const db = getDatabase();
+//firebase
 
-const { insertPoint, modalСardRef, overlayBackgroundRef, overlayRef, clsBtnRef, themeSwitch } = getRefs();
+const { insertPoint, modalСardRef, overlayBackgroundRef, overlayRef, clsBtnRef, themeSwitch } =
+  getRefs();
 let movieID;
 
 insertPoint.addEventListener('click', onClickOnCard);
@@ -28,7 +41,7 @@ modalСardRef.addEventListener('click', onModalBtnClick);
 async function onClickOnCard(e) {
   if (e.target.nodeName !== 'UL') {
     e.preventDefault();
-    
+
     //Получаем ID фильма из data-атрибута, делаем запрос по ID на API-сервис
     const imgRef = e.target.parentNode.querySelector('img');
     const result = await createModalFilm(imgRef.dataset.src);
@@ -38,10 +51,11 @@ async function onClickOnCard(e) {
     //Добавляем данные фильма в LS для возможного добавления карточки в библиотеку
     addItemToLocalStorage(result);
     addItemToFirebase(result);
+    getTrailer(movieID);
     //Показываем фоновый постер с оверлеем
     overlayBackgroundRef.classList.add('is-open');
     overlayRef.classList.add('is-open');
-    themeSwitch.classList.add('disabled')
+    themeSwitch.classList.add('disabled');
     overlayBackgroundRef.style.backgroundImage = `linear-gradient(rgb(255, 255, 255, 0.1), rgb(255, 255, 255, 0.1)), url("${result.backdrop}")`;
     //Проверяем, есть ли текущий фильм в библиотеке, если да - делаем активными соотв. кнопки
     setButtonView(movieID, modalСardRef.querySelector('#btn-add-watched'));
@@ -59,17 +73,12 @@ async function onClickOnCard(e) {
 
 function onModalBtnClick(e) {
   if (e.target.nodeName === 'BUTTON') {
-
-
-   
-
     if (e.target.classList.contains('btn--active'))
       deleteItemFromLibrary(e.target.dataset.lib, movieID);
-    else    
-      addItemToLibrary(e.target.dataset.lib);
-      console.log(e.target.dataset.lib);
-      addItemToLibraryFirebase(e.target.dataset.lib)
-      setButtonView(movieID, e.target);
+    else addItemToLibrary(e.target.dataset.lib);
+    console.log(e.target.dataset.lib);
+    addItemToLibraryFirebase(e.target.dataset.lib);
+    setButtonView(movieID, e.target);
   }
 }
 //localStorage add
@@ -78,10 +87,10 @@ function addItemToLocalStorage(res) {
 }
 //firebase add + remove
 function addItemToFirebase(result) {
-  set(ref(db, 'ky'), result)
+  set(ref(db, 'ky'), result);
 }
 function removeItemToFirebase() {
-  remove(ref(db, 'ky'))
+  remove(ref(db, 'ky'));
 }
 //localStorage addItemToLibrary
 function addItemToLibrary(collection) {
@@ -92,17 +101,14 @@ function addItemToLibrary(collection) {
 }
 //firebase addItemToLibrary
 function addItemToLibraryFirebase(collection) {
-  let arr = []
-  get(ref(db, 'ky'))
-    .then(data => {
-      console.log(data.val())
-      arr.push(data.val())
-      console.log('массив из базы',arr);
-      set(ref(db, collection), arr)
-      .then(data=>console.log(data  ))
-    }
-  )
-  
+  let arr = [];
+  get(ref(db, 'ky')).then(data => {
+    console.log(data.val());
+    arr.push(data.val());
+    console.log('массив из базы', arr);
+    set(ref(db, collection), arr).then(data => console.log(data));
+  });
+
   // let arrLib = []
   // onValue(ref(db, 'ky'), (e) => {
   //   e.forEach((echild) => {
@@ -111,8 +117,6 @@ function addItemToLibraryFirebase(collection) {
   //   console.log('firebase', arrLib);
   //   push(ref(db,collection), arrLib)
   //  })
-  
-  
 }
 function deleteItemFromLibrary(collection, id) {
   let arrLib = JSON.parse(localStorage.getItem(collection));
@@ -135,12 +139,12 @@ function setButtonView(movieID, btnRef) {
 
 function closeModal() {
   modalСardRef.innerHTML = '';
-  themeSwitch.classList.remove('disabled')
+  themeSwitch.classList.remove('disabled');
   overlayBackgroundRef.classList.remove('is-open');
   overlayRef.classList.remove('is-open');
   clsBtnRef.removeEventListener('click', closeModal);
   overlayRef.removeEventListener('click', closeModal);
   window.removeEventListener('keydown', closeModal);
   localStorage.removeItem('ky');
-  removeItemToFirebase()
+  removeItemToFirebase();
 }

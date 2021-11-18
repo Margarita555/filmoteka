@@ -80,7 +80,7 @@ API.prototype._setQuery = function (newQuery) {
   this._searchQuery = newQuery;
 };
 
-// записывает новый _searchQuery
+// записывает новый _setId
 API.prototype._setId = function (newId) {
   this._movieId = newId;
 };
