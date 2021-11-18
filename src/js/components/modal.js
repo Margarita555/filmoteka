@@ -2,6 +2,8 @@ import getRefs from '../refs/get-refs';
 import createModalFilm from '../data/create-modal-film-data';
 import modal from '../../handlebars/modal.hbs';
 import getTrailer from './get-trailer';
+import { currentStorage, changeStorage } from './library';
+import { Theme } from './theme';
 //firesase connect
 import { initializeApp } from 'firebase/app';
 import {
@@ -30,8 +32,16 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 //firebase
 
-const { insertPoint, modalСardRef, overlayBackgroundRef, overlayRef, clsBtnRef, themeSwitch } =
-  getRefs();
+const {
+  insertPoint,
+  modalRef,
+  modalСardRef,
+  overlayBackgroundRef,
+  overlayRef,
+  clsBtnRef,
+  themeSwitch,
+  libraryLink,
+} = getRefs();
 let movieID;
 
 insertPoint.addEventListener('click', onClickOnCard);
@@ -46,8 +56,17 @@ async function onClickOnCard(e) {
     const imgRef = e.target.parentNode.querySelector('img');
     const result = await createModalFilm(imgRef.dataset.src);
     movieID = result.id;
-    //Получаем разметку модального окна по шаблону
+    //Получаем разметку модального окна по шаблону и вставляем ее модальное окно
     modalСardRef.insertAdjacentHTML('beforeend', modal(result));
+    //Устанавливаем текущую тему
+    let currentTheme = localStorage.getItem('theme');
+    if (currentTheme === Theme.DARK) {
+      modalRef.classList.add(Theme.DARK);
+      modalRef.classList.remove(Theme.LIGHT);
+    } else {
+      modalRef.classList.remove(Theme.DARK);
+      modalRef.classList.add(Theme.LIGHT);
+    }
     //Добавляем данные фильма в LS для возможного добавления карточки в библиотеку
     addItemToLocalStorage(result);
     addItemToFirebase(result);
@@ -147,4 +166,5 @@ function closeModal() {
   window.removeEventListener('keydown', closeModal);
   localStorage.removeItem('ky');
   removeItemToFirebase();
+  if (libraryLink.classList.contains('active')) changeStorage(currentStorage);
 }

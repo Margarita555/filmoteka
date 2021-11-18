@@ -1,7 +1,7 @@
 import getRefs from '../refs/get-refs';
 import card from '../../handlebars/cardMovie.hbs';
 import renderPagination from './pages';
-
+export let currentStorage;
 const {
   libraryLink,
   homeLink,
@@ -32,6 +32,7 @@ function openLibrary() {
 function watchedStorage() {
   pagesContainer.classList.add('page__hidden');
   changeStorage('Watched');
+  currentStorage = 'Watched';
   btnQueue.classList.remove('in-active');
   btnWatched.classList.add('in-active');
 }
@@ -39,11 +40,12 @@ function watchedStorage() {
 function queuedStorage() {
   pagesContainer.classList.add('page__hidden');
   changeStorage('Queue');
+  currentStorage = 'Queue';
   btnWatched.classList.remove('in-active');
   btnQueue.classList.add('in-active');
 }
 
-function changeStorage(value) {
+export function changeStorage(value) {
   insertPoint.innerHTML = '';
   pagesContainer.classList.add('page__hidden');
 
