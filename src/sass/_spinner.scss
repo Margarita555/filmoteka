@@ -10,7 +10,7 @@
   display: inline;
   border: 7px solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
-  border-top-color: #ff6b01;
+  border-top-color: var(--accent-color);
   margin-bottom: 10rem;
   animation: 1s spin infinite ease-in-out;
 }
@@ -30,7 +30,7 @@
   z-index: 999;
   width: 25px;
   height: 25px;
-  background-color: #ff6b01;
+  background-color: var(--accent-color);
   border-radius: 50%;
   display: inline-block;
   animation: 3s bounce infinite ease-in-out both;
