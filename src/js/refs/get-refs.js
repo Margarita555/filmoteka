@@ -37,9 +37,9 @@ export default function getRefs() {
     pagesContainer: document.querySelector('.page__container'),
     mainContainer: document.querySelector('.main'),
     //FOOTER
-    openFooterModalBtn: document.querySelector('[footer-modal-open]'),
-    closeFooterModalBtn: document.querySelector('[footer-modal-close]'),
-    footerModal: document.querySelector('[footer-modal]'),
+    openFooterModalBtn: document.querySelector('[data-footer-modal-open]'),
+    closeFooterModalBtn: document.querySelector('[data-footer-modal-close]'),
+    footerModal: document.querySelector('[data-footer-modal]'),
     backdropRef: document.querySelector('.backdrop'),
     searchForm: document.querySelector('.js-search-form'),
     backToTopRef: document.querySelector('.back-to-top'),
