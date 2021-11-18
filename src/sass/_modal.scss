@@ -56,6 +56,65 @@
     width: 882px;
     height: 568px;
   }
+  &.light-theme {
+    background-image: linear-gradient(rgb(255, 255, 255, 0.7), rgb(255, 255, 255, 0.9));
+  }
+  &.dark-theme {
+    background-image: linear-gradient(rgba(50, 50, 50, 0.7), rgb(50, 50, 50, 0.9));
+  }
+  &.light-theme .card__name {
+    color: var(--black-text-color);
+  }
+  &.dark-theme .card__name {
+    color: var(--white-text-color);
+  }
+  &.light-theme .parameter__value,
+  &.light-theme .card__about-caption,
+  &.light-theme .card__about,
+  &.light-theme .mobile-about-caption,
+  &.light-theme .mobile-about {
+    color: var(--black-text-color);
+    font-weight: 500;
+  }
+  &.dark-theme .parameter__value,
+  &.dark-theme .card__about-caption,
+  &.dark-theme .card__about,
+  &.dark-theme .mobile-about-caption,
+  &.dark-theme .mobile-about,
+  &.dark-theme .modal-form__btn {
+    color: var(--white-text-color);
+    font-weight: 400;
+  }
+  &.light-theme .modal-form__btn {
+    color: var(--black-text-color);
+    border: 1px solid var(--black-text-color);
+  }
+  &.dark-theme .modal-form__btn {
+    color: var(--white-text-color);
+    border: 1px solid var(--white-text-color);
+  }
+  &.light-theme .modal-form__close-btn {
+    background-color: transparent;
+  }
+  &.dark-theme .modal-form__close-btn {
+    background-color: var(--white-text-color);
+  }
+  &.light-theme .btn--active,
+  &.dark-theme .btn--active {
+    border: none;
+    background-color: var(--accent-color);
+    color: var(--white-text-color);
+  }
+  &.light-theme .btn:hover,
+  &.dark-theme .btn:hover {
+    border: none;
+    background-color: rgb(255, 107, 8, 0.7);
+    color: var(--white-text-color);
+  }
+  &.light-theme .parameter__value--avg,
+  &.dark-theme .parameter__value--avg {
+    color: var(--white-text-color);
+  }
 }
 
 .modal-form__close-btn {
@@ -71,7 +130,6 @@
   margin: 0;
   border: none;
   border-radius: 50%;
-  background-color: transparent;
   cursor: pointer;
   outline: none;
   background-image: url('../images/close.svg');
@@ -146,7 +204,6 @@
   font-size: 20px;
   line-height: 1.15;
   text-transform: uppercase;
-  color: #000000;
 
   @media screen and (min-width: 1024px) {
     margin-bottom: 30px;
@@ -189,17 +246,15 @@
 }
 
 .parameter__value {
-  font-weight: 500;
   font-size: 12px;
   line-height: 1.167;
-  color: var(--black-text-color);
   &--avg {
     width: 36px;
     margin-right: 3px;
     padding: 1px 0px;
     text-align: center;
-    background-color: var(--accent-color);
     color: var(--white-text-color);
+    background-color: var(--accent-color);
     border-radius: 5px;
   }
   &--cnt {
@@ -216,10 +271,8 @@
 .card__about-caption {
   margin-bottom: 10px;
 
-  font-weight: 500;
   font-size: 12px;
   line-height: 1.33;
-  color: #000000;
   text-transform: uppercase;
   @media screen and (max-width: 767px) {
     display: none;
@@ -229,10 +282,9 @@
   margin-bottom: 20px;
   max-height: 237px;
   overflow-y: auto;
-  font-weight: 500;
+
   font-size: 12px;
   line-height: 1.67;
-  color: var(--black-text-color);
   @media screen and (max-width: 767px) {
     display: none;
   }
@@ -240,10 +292,8 @@
 .mobile-about-caption {
   margin-bottom: 10px;
 
-  font-weight: 500;
   font-size: 12px;
   line-height: 1.33;
-  color: var(--black-text-color);
   text-transform: uppercase;
   @media screen and (min-width: 768px) {
     display: none;
@@ -257,10 +307,8 @@
 .mobile-about {
   margin-bottom: 20px;
 
-  font-weight: 500;
   font-size: 12px;
   line-height: 1.67;
-  color: var(--black-text-color);
 
   @media screen and (min-width: 768px) {
     display: none;

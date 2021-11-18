@@ -1,12 +1,11 @@
 import getRefs from '../refs/get-refs';
-const Theme = {
+export const Theme = {
   LIGHT: 'light-theme',
   DARK: 'dark-theme',
 };
 const { switchItem, selector, bodyContainer } = getRefs();
 const themeInLocal = localStorage.getItem('theme');
 const footerTheme = document.querySelector('.footer');
-console.log(footerTheme);
 selector.addEventListener('click', switchTemes);
 selector.addEventListener('click', setLocalStorage);
 
@@ -21,7 +20,6 @@ function setLocalStorage(evt) {
   if (selector.checked) {
     localStorage.setItem('theme', Theme.DARK);
   } else {
-    localStorage.removeItem('theme');
     localStorage.setItem('theme', Theme.LIGHT);
   }
 }
