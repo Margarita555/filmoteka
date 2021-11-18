@@ -56,11 +56,11 @@ async function onClickOnCard(e) {
     const imgRef = e.target.parentNode.querySelector('img');
     const result = await createModalFilm(imgRef.dataset.src);
     movieID = result.id;
+    console.dir(result);
     //Получаем разметку модального окна по шаблону и вставляем ее модальное окно
     modalСardRef.insertAdjacentHTML('beforeend', modal(result));
     //Устанавливаем текущую тему
-    let currentTheme = localStorage.getItem('theme');
-    if (currentTheme === Theme.DARK) {
+    if (localStorage.getItem('theme') === Theme.DARK) {
       modalRef.classList.add(Theme.DARK);
       modalRef.classList.remove(Theme.LIGHT);
     } else {
