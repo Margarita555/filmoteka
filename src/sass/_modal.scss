@@ -125,13 +125,15 @@
 }
 .modal-form__trailer {
   position: absolute;
-  bottom: 10px;
-  right: 10px;
-  width: 48px;
-  height: 48px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-color: inherit;
   background-image: url(../images/youtube-play.svg);
-  background-size: contain;
+  background-position: bottom right;
+  background-repeat: no-repeat;
+  background-size: initial;
   border: none;
   opacity: 0.8;
   cursor: pointer;
