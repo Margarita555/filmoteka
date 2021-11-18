@@ -2,6 +2,7 @@ import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
 
 import API from '../API/api-service';
+import unavailable from '../../images/video-unavailable.png';
 
 const api = new API();
 
@@ -13,7 +14,6 @@ async function getTrailer(id) {
 
   const trailer = trailers.find(trailer => {
     const officialTrailer = 'trailer';
-
     if (officialTrailer === trailer.type.toLowerCase()) {
       return trailer;
     }
@@ -22,6 +22,12 @@ async function getTrailer(id) {
   trailerBtn.addEventListener('click', event => {
     event.preventDefault();
     if (!event.currentTarget.dataset.trailer) return;
+
+    if (!trailer) {
+      const popUp = basicLightbox.create(`<img width="560" height="315" src='${unavailable}' />`);
+      popUp.show();
+      return;
+    }
 
     const popUp = basicLightbox.create(
       `<iframe width="560" height="315" src='https://www.youtube.com/embed/${trailer.key}'frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`,
