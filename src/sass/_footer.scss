@@ -1,8 +1,8 @@
-.footer-wrapper.light-theme {
+.footer-wrapper .light-theme {
   background-color: var(--secondary-bg-color);
   color: var(--footer-text-color);
 }
-.footer-wrapper.dark-theme {
+.footer-wrapper .dark-theme {
   background-color: inherit;
   color: var(--accent-color);
 }
