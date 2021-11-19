@@ -33,16 +33,6 @@ API.prototype.fetchMovieGenre = async function () {
   }
 };
 
-//Фетч популярных фильмов
-API.prototype.fetchMoviePopular = async function () {
-  try {
-    const response = await axios.get(`/movie/popular?`);
-    return response.data.results;
-  } catch (error) {
-    console.error(error);
-  }
-};
-
 // Фетч по поисковому запросу
 API.prototype.fetchMovieSearchQuery = async function () {
   try {
@@ -65,7 +55,7 @@ API.prototype.fetchMovieDescription = async function () {
   }
 };
 
-//Фетч для трейлеров
+//Фетч трейлеров
 API.prototype.fetchMovieTrailer = async function () {
   try {
     const response = await axios.get(`/movie/${this._movieId}/videos?`);
@@ -75,21 +65,21 @@ API.prototype.fetchMovieTrailer = async function () {
   }
 };
 
-// записывает новый _searchQuery
+// записывает новый this._searchQuery
 API.prototype._setQuery = function (newQuery) {
   this._searchQuery = newQuery;
 };
 
-// записывает новый _setId
+// записывает новый this._movieId
 API.prototype._setId = function (newId) {
   this._movieId = newId;
 };
 
-// записывает новую страницу
+// записывает новую this._page
 API.prototype._setPage = function (newPage) {
   this._page = newPage;
 };
-// сбрас страниц
+// сброс страниц
 API.prototype._resetPage = function () {
   this._page = 1;
 };
