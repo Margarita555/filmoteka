@@ -50,6 +50,7 @@ export function changeStorage(value) {
   pagesContainer.classList.add('page__hidden');
 
   let items = JSON.parse(localStorage.getItem(value));
+  if (!items) return;
   let firstPageItems = items.slice(0, 20);
   insertPoint.insertAdjacentHTML('beforeend', card(firstPageItems));
   mainContainer.classList.remove('enabled');
