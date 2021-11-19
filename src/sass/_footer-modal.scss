@@ -187,7 +187,10 @@
   height: 70%;
   border-radius: 100px;
 }
-
+.member-link {
+  list-style: none;
+  color: var(--black-text-color);
+}
 .member-descr {
   display: flex;
   flex-wrap: wrap;
