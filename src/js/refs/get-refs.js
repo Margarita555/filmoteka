@@ -43,6 +43,6 @@ export default function getRefs() {
     backdropRef: document.querySelector('.backdrop'),
     searchForm: document.querySelector('.js-search-form'),
     backToTopRef: document.querySelector('.back-to-top'),
-    footerTheme: document.querySelector('.footer'),
+    footerTheme: document.querySelector('.footer-wrapper'),
   };
 }

@@ -57,14 +57,6 @@ export default function renderPagination(requestValue, totalPagesNumber, searchV
   let firstSliceElement = 0;
   let activeIndex = 0;
   insertNewPages(markupArray, activeIndex, firstSliceElement, pagesInView);
-
-  if (totalPages < pagesInView) {
-    nextBtn.classList.add('page__hidden');
-    prevBtn.classList.add('page__hidden');
-  } else {
-    nextBtn.classList.remove('page__hidden');
-    prevBtn.classList.remove('page__hidden');
-  }
   return;
 }
 
@@ -80,7 +72,10 @@ function insertNewPages(markupArray, activeIndex, firstSliceElement, lastSliceEl
   setFirstPageBtn(firstEl);
   setLastPageBtn(firstEl, newPageslength);
   setEllipsis(firstEl, newPages.length);
-  lastPageBtn.addEventListener('click', onLastPageBtnClick);
+  let activePage = Number(newPages[activeIndex].innerText)
+  setPrevBtn(activePage, firstEl);
+  setNextBtn(Number(newPages[newPageslength-1].innerText), activePage)
+  // lastPageBtn.addEventListener('click', onLastPageBtnClick);
 }
 
 function getActivePages() {
@@ -99,6 +94,9 @@ function onPageNumberClick(e) {
   const pageNumber = Number(e.target.innerText);
   currentActivePage.classList.remove('page__number--active');
   e.target.classList.add('page__number--active');
+  setPrevBtn(pageNumber, Number(allPagesArray[0].innerText));
+  let lastEl = Number(allPagesArray[allPagesArray.length - 1].innerText)
+  setNextBtn(lastEl, Number(e.target.innerText))
   fetchFilms(pageNumber);
 }
 
@@ -124,6 +122,9 @@ function onNextBtnClick() {
     }
   }
   let pageNumber = currentNumber + 1;
+  setPrevBtn(pageNumber, Number(allPagesArray[0].innerText))
+  let lastEl = Number(allPagesArray[allPagesArray.length-1].innerText)
+  setNextBtn(lastEl, pageNumber)
   fetchFilms(pageNumber);
 }
 
@@ -144,7 +145,9 @@ function onPrevBtnClick() {
       allPagesArray[i - 1].classList.add('page__number--active');
     }
   }
+  let lastEl = Number(allPagesArray[allPagesArray.length - 1])
   let pageNumber = currentNumber - 1;
+  setNextBtn(lastEl, pageNumber);
   fetchFilms(pageNumber);
 }
 
@@ -170,6 +173,24 @@ function onFirstPageBtnClick() {
   let activeIndex = 0;
   insertNewPages(markupArray, activeIndex, firstSliceElement, pagesInView);
   fetchFilms(1);
+}
+
+function setPrevBtn(activeEl, firstEl) {
+  console.log(activeEl, firstEl)
+ if (totalPages < pagesInView || (activeEl === 1 && firstEl === 1)) {
+   prevBtn.classList.add('page__hidden');
+ } 
+ else {
+   prevBtn.classList.remove('page__hidden');
+  }
+}
+
+function setNextBtn(lastEl, activePage) {
+  if (totalPages < pagesInView || (totalPages === lastEl && totalPages === activePage)) {
+    nextBtn.classList.add('page__hidden');
+  } else {
+    nextBtn.classList.remove('page__hidden');
+  }
 }
 
 function setFirstPageBtn(firstEl) {
