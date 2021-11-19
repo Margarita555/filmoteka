@@ -95,7 +95,6 @@ function onModalBtnClick(e) {
     if (e.target.classList.contains('btn--active'))
       deleteItemFromLibrary(e.target.dataset.lib, movieID);
     else addItemToLibrary(e.target.dataset.lib);
-    console.log(e.target.dataset.lib);
     addItemToLibraryFirebase(e.target.dataset.lib);
     setButtonView(movieID, e.target);
   }
