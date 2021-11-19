@@ -56,7 +56,6 @@ async function onClickOnCard(e) {
     const imgRef = e.target.parentNode.querySelector('img');
     const result = await createModalFilm(imgRef.dataset.src);
     movieID = result.id;
-    console.dir(result);
     //Получаем разметку модального окна по шаблону и вставляем ее модальное окно
     modalСardRef.insertAdjacentHTML('beforeend', modal(result));
     //Устанавливаем текущую тему
@@ -121,10 +120,10 @@ function addItemToLibrary(collection) {
 function addItemToLibraryFirebase(collection) {
   let arr = [];
   get(ref(db, 'ky')).then(data => {
-    console.log(data.val());
+    // console.log(data.val());
     arr.push(data.val());
-    console.log('массив из базы', arr);
-    set(ref(db, collection), arr).then(data => console.log(data));
+    // console.log('массив из базы', arr);
+    set(ref(db, collection), arr).then(); //data => console.log(data));
   });
 
   // let arrLib = []

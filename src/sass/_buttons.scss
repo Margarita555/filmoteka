@@ -18,7 +18,9 @@
 }
 
 .btn:hover {
-  border: none;
-  background-color: rgb(255, 107, 8, 0.7);
-  color: var(--white-text-color);
+  @media screen and (min-width: 1024px) {
+    border: none;
+    background-color: rgb(255, 107, 8, 0.5);
+    color: var(--white-text-color);
+  }
 }
