@@ -226,7 +226,6 @@ async function fetchFilms(pageNumber) {
       let parsedResult = localStorage.getItem('Watched')
         ? JSON.parse(localStorage.getItem('Watched'))
         : [];
-      console.log(parsedResult);
       insertPoint.innerHTML = '';
       markup = getWatchedAndQueuedFilmsMarkup(parsedResult, pageNumber);
     } else if (request == 'Queue') {
