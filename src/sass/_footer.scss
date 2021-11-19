@@ -32,7 +32,7 @@
   font-size: 14px;
   line-height: 1.17;
   text-align: center;
-  align-items: center;
+  // align-items: center;
 }
 
 .footer-container_first-part {
@@ -49,13 +49,14 @@
   .footer-container {
     display: flex;
     justify-content: center;
+    align-items: center;
     font-size: 16px;
     padding-top: 10px;
-    // margin-right: 40px;
   }
 
-  .logo-container {
-    margin-left: 40px;
+  .footer-container_first-part {
+    margin-bottom: 0;
+    margin-right: 4px;
   }
 }
 @media screen and (min-width: 1024px) {
