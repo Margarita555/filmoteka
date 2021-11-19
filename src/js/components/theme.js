@@ -3,9 +3,9 @@ export const Theme = {
   LIGHT: 'light-theme',
   DARK: 'dark-theme',
 };
-const { switchItem, selector, bodyContainer } = getRefs();
+const { selector, bodyContainer, footerTheme } = getRefs();
 const themeInLocal = localStorage.getItem('theme');
-const footerTheme = document.querySelector('.footer');
+
 selector.addEventListener('click', switchTemes);
 selector.addEventListener('click', setLocalStorage);
 
