@@ -35,12 +35,12 @@
   cursor: pointer;
 
   &:hover {
+    color: var(--white-text-color);
+    border-radius: 5px;
     @media screen and (min-width: 1024px) {
-      color: var(--white-text-color);
-      background-color: lighten(#ff6b08, 25%);
       transition: color,
         background-color var(--modal-transition-delay) var(--default-transition-timing);
-      border-radius: 5px;
+      background-color: lighten(#ff6b08, 25%);
     }
   }
   @media screen and (min-width: 320px) and (max-width: 768px) {

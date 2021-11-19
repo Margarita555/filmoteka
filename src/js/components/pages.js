@@ -1,15 +1,25 @@
 import API from '../API/api-service';
 import imageCardsTemplate from '../../handlebars/cardMovie.hbs';
 import createCardData from '../data/create-card-data';
-import { startSpinner, stopSpinner} from './spinner';
+import { startSpinner, stopSpinner } from './spinner';
 import getRefs from '../refs/get-refs';
-const { insertPoint, pageNumbersContainer, nextBtn, prevBtn, firstPageBtn,
-  lastPageBtn,pageEllipsisStart, pageEllipsisFinish, pagesContainer, header } = getRefs();
+const {
+  insertPoint,
+  pageNumbersContainer,
+  nextBtn,
+  prevBtn,
+  firstPageBtn,
+  lastPageBtn,
+  pageEllipsisStart,
+  pageEllipsisFinish,
+  pagesContainer,
+  header,
+} = getRefs();
 
 const api = new API();
-let request = null
-let searchInputValue = null
-let totalPages = null
+let request = null;
+let searchInputValue = null;
+let totalPages = null;
 let markupArray = [];
 let pagesInView = 5;
 
@@ -23,9 +33,9 @@ pagesContainer.addEventListener('click', smoothScroll);
 function smoothScroll() {
   setTimeout(() => {
     header.scrollIntoView({
-        behavior: 'smooth'
+      behavior: 'smooth',
     });
-  },500)
+  }, 500);
 }
 
 export default function renderPagination(requestValue, totalPagesNumber, searchValue) {
@@ -36,34 +46,33 @@ export default function renderPagination(requestValue, totalPagesNumber, searchV
   const totalPagesArray = [];
   pageNumbersContainer.innerHTML = '';
 
-  for (let i = 1; i <= totalPages; i += 1){
-  totalPagesArray.push(i)
+  for (let i = 1; i <= totalPages; i += 1) {
+    totalPagesArray.push(i);
   }
   const pagesMarkup = totalPagesArray.map(page => {
-    return `<div class="page__number page__block">${page}</div>`
+    return `<div class="page__number page__block">${page}</div>`;
   });
-  
+
   markupArray = pagesMarkup;
   let firstSliceElement = 0;
   let activeIndex = 0;
-  insertNewPages (markupArray, activeIndex, firstSliceElement, pagesInView);
+  insertNewPages(markupArray, activeIndex, firstSliceElement, pagesInView);
 
   if (totalPages < pagesInView) {
     nextBtn.classList.add('page__hidden');
     prevBtn.classList.add('page__hidden');
-  }
-  else {
+  } else {
     nextBtn.classList.remove('page__hidden');
     prevBtn.classList.remove('page__hidden');
   }
-  return
+  return;
 }
 
-function insertNewPages (markupArray,activeIndex, firstSliceElement, lastSliceElement){
-  const pagesMarkupArray = [...markupArray]
-  const newPagesMarkupArray = pagesMarkupArray.slice(firstSliceElement,lastSliceElement);
-    pageNumbersContainer.innerHTML = '';
-    pageNumbersContainer.insertAdjacentHTML('beforeend', newPagesMarkupArray.join(''));
+function insertNewPages(markupArray, activeIndex, firstSliceElement, lastSliceElement) {
+  const pagesMarkupArray = [...markupArray];
+  const newPagesMarkupArray = pagesMarkupArray.slice(firstSliceElement, lastSliceElement);
+  pageNumbersContainer.innerHTML = '';
+  pageNumbersContainer.insertAdjacentHTML('beforeend', newPagesMarkupArray.join(''));
   const newPages = document.querySelectorAll('.page__number');
   newPages[activeIndex].classList.add('page__number--active');
   let firstEl = Number(newPages[0].innerText);
@@ -90,108 +99,103 @@ function onPageNumberClick(e) {
   const pageNumber = Number(e.target.innerText);
   currentActivePage.classList.remove('page__number--active');
   e.target.classList.add('page__number--active');
-  fetchFilms(pageNumber); 
+  fetchFilms(pageNumber);
 }
 
 function onNextBtnClick() {
   let { currentActivePage, currentNumber, allPagesArray } = getActivePages();
   if (currentNumber === totalPages) {
-      return
+    return;
   }
   if (currentNumber % pagesInView === 0) {
     const insertionsTotal = currentNumber / pagesInView;
     let firstSliceElement = pagesInView * insertionsTotal;
     let lastSliceElement = pagesInView + pagesInView * insertionsTotal;
     let activeIndex = 0;
-    insertNewPages (markupArray, activeIndex, firstSliceElement, lastSliceElement)
+    insertNewPages(markupArray, activeIndex, firstSliceElement, lastSliceElement);
   }
   for (let i = 0; i < allPagesArray.length; i += 1) {
     if (i === pagesInView - 1) {
-      allPagesArray = [...document.getElementsByClassName('page__number')]
-   }
+      allPagesArray = [...document.getElementsByClassName('page__number')];
+    }
     if (allPagesArray[i] == currentActivePage) {
-        currentActivePage.classList.remove('page__number--active');
-        allPagesArray[i + 1].classList.add('page__number--active');
-      }
+      currentActivePage.classList.remove('page__number--active');
+      allPagesArray[i + 1].classList.add('page__number--active');
+    }
   }
-  let pageNumber = currentNumber + 1
+  let pageNumber = currentNumber + 1;
   fetchFilms(pageNumber);
 }
 
 function onPrevBtnClick() {
-  const { currentActivePage, currentNumber, allPagesArray} = getActivePages();
+  const { currentActivePage, currentNumber, allPagesArray } = getActivePages();
   if (currentNumber === 1) {
-      return
-    } 
-  if ((currentNumber-1) % pagesInView === 0) {
+    return;
+  }
+  if ((currentNumber - 1) % pagesInView === 0) {
     let firstSliceElement = currentNumber - 1 - pagesInView;
-    let lastSliceElement = currentNumber-1;
+    let lastSliceElement = currentNumber - 1;
     let activeIndex = pagesInView - 1;
-    insertNewPages (markupArray, activeIndex, firstSliceElement, lastSliceElement);
+    insertNewPages(markupArray, activeIndex, firstSliceElement, lastSliceElement);
   }
   for (let i = 1; i < pagesInView; i += 1) {
     if (allPagesArray[i] == currentActivePage) {
-        currentActivePage.classList.remove('page__number--active');
-        allPagesArray[i -1].classList.add('page__number--active');
-      }
+      currentActivePage.classList.remove('page__number--active');
+      allPagesArray[i - 1].classList.add('page__number--active');
+    }
   }
   let pageNumber = currentNumber - 1;
   fetchFilms(pageNumber);
 }
 
 function onLastPageBtnClick(e) {
-  const { currentActivePage} = getActivePages();
+  const { currentActivePage } = getActivePages();
   const lastPageValue = Number(e.target.innerText);
   let firstSliceElement = null;
   let activeIndex = 0;
-  if (totalPages%5 === 0){
-     firstSliceElement = totalPages - pagesInView;
-     activeIndex = pagesInView - 1;
+  if (totalPages % 5 === 0) {
+    firstSliceElement = totalPages - pagesInView;
+    activeIndex = pagesInView - 1;
+  } else {
+    firstSliceElement = totalPages - (totalPages % 5);
+    activeIndex = (totalPages % 5) - 1;
   }
-  else {
-    firstSliceElement = totalPages-(totalPages%5)
-    activeIndex = (totalPages % 5) -1
-  }
-  insertNewPages (markupArray, activeIndex,  firstSliceElement)
-  fetchFilms(lastPageValue) 
+  insertNewPages(markupArray, activeIndex, firstSliceElement);
+  fetchFilms(lastPageValue);
 }
 
 function onFirstPageBtnClick() {
-  const { currentActivePage} = getActivePages();
+  const { currentActivePage } = getActivePages();
   let firstSliceElement = 0;
   let activeIndex = 0;
-  insertNewPages (markupArray, activeIndex, firstSliceElement, pagesInView)
-  fetchFilms(1) 
-  }
+  insertNewPages(markupArray, activeIndex, firstSliceElement, pagesInView);
+  fetchFilms(1);
+}
 
 function setFirstPageBtn(firstEl) {
-  if (firstEl > 1 ) {
-  firstPageBtn.classList.remove('page__hidden');
-  }
-  else {
+  if (firstEl > 1) {
+    firstPageBtn.classList.remove('page__hidden');
+  } else {
     firstPageBtn.classList.add('page__hidden');
   }
 }
 
 function setLastPageBtn(firstEl, length) {
-  if (firstEl > totalPages - length){
+  if (firstEl > totalPages - length) {
     lastPageBtn.classList.add('page__hidden');
-  }
-  else {
-  lastPageBtn.classList.remove('page__hidden');
-  lastPageBtn.innerText = totalPages;
+  } else {
+    lastPageBtn.classList.remove('page__hidden');
+    lastPageBtn.innerText = totalPages;
   }
 }
 
 function setEllipsis(firstEl, length) {
-  if (totalPages < pagesInView ) {
+  if (totalPages < pagesInView) {
     pageEllipsisFinish.classList.add('page__hidden');
     pageEllipsisStart.classList.add('page__hidden');
-  }
-   else if ((firstEl + length -1) === totalPages ) {
+  } else if (firstEl + length - 1 === totalPages) {
     pageEllipsisFinish.classList.add('page__hidden');
-  }
-  else if (firstEl >= 1 && (firstEl + length -1) < (totalPages - 2)) {
+  } else if (firstEl >= 1 && firstEl + length - 1 < totalPages - 2) {
     pageEllipsisFinish.classList.remove('page__hidden');
   }
   if (firstEl > 1) {
@@ -205,35 +209,33 @@ function setEllipsis(firstEl, length) {
 async function fetchFilms(pageNumber) {
   startSpinner();
   try {
-    
     api._setPage(pageNumber);
-    api._setQuery(searchInputValue)
-    let data
-    let markup
+    api._setQuery(searchInputValue);
+    let data;
+    let markup;
     insertPoint.innerHTML = '';
-    if(request == "searchQuery"){
+    if (request == 'searchQuery') {
       data = await api.fetchMovieSearchQuery();
       let result = await data.results;
       markup = await createCardData(result);
-    }
-    else if (request == "home") {
+    } else if (request == 'home') {
       data = await api.fetchMovieTrending();
       let result = await data.results;
       markup = await createCardData(result);
-    }
-    else if (request == 'Watched') {
-    let parsedResult = localStorage.getItem('Watched')
-        ? JSON.parse(localStorage.getItem('Watched')) : [];
-      console.log(parsedResult)
+    } else if (request == 'Watched') {
+      let parsedResult = localStorage.getItem('Watched')
+        ? JSON.parse(localStorage.getItem('Watched'))
+        : [];
+      console.log(parsedResult);
       insertPoint.innerHTML = '';
-    markup = getWatchedAndQueuedFilmsMarkup(parsedResult, pageNumber);
-    }
-    else if (request == 'Queue') {
-      let parsedResult = localStorage.getItem('Queue') ? JSON.parse(localStorage.getItem('Queue')) : [];
       markup = getWatchedAndQueuedFilmsMarkup(parsedResult, pageNumber);
-    
+    } else if (request == 'Queue') {
+      let parsedResult = localStorage.getItem('Queue')
+        ? JSON.parse(localStorage.getItem('Queue'))
+        : [];
+      markup = getWatchedAndQueuedFilmsMarkup(parsedResult, pageNumber);
     }
-    
+
     insertPoint.insertAdjacentHTML('beforeend', imageCardsTemplate(markup));
     stopSpinner();
   } catch (error) {
@@ -241,18 +243,17 @@ async function fetchFilms(pageNumber) {
   }
 }
 
- function getWatchedAndQueuedFilmsMarkup(parsedResult, pageNumber) {
-let result = null
-    result = parsedResult.slice(0, 5);
-if (parsedResult.length <= 20) {
-        result = parsedResult;
-} else if (pageNumber === 1) {
-  result = parsedResult.slice(0, 20);
-} else if ((parsedResult.length - (20 * pageNumber)) > 20) {
-  result = parsedResult.slice((20 * (pageNumber - 1)), 20 * pageNumber)
+function getWatchedAndQueuedFilmsMarkup(parsedResult, pageNumber) {
+  let result = null;
+  result = parsedResult.slice(0, 5);
+  if (parsedResult.length <= 20) {
+    result = parsedResult;
+  } else if (pageNumber === 1) {
+    result = parsedResult.slice(0, 20);
+  } else if (parsedResult.length - 20 * pageNumber > 20) {
+    result = parsedResult.slice(20 * (pageNumber - 1), 20 * pageNumber);
+  } else {
+    result = parsedResult.slice(20 * (pageNumber - 1));
+  }
+  return result;
 }
-else {
-    result = parsedResult.slice((20 * (pageNumber - 1)))
-  }
-   return result
-  }
