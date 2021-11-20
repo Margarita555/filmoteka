@@ -253,18 +253,16 @@
     padding: 14px 38px;
   }
 }
-
-.header__btn.in-active {
-  border: 1px solid var(--accent-color);
-  background-color: var(--accent-color);
-  color: var(--white-text-color);
-  filter: drop-shadow(0px 8px 43px rgba(255, 107, 1, 0.6));
-}
-
 .header__btn:hover {
   border: inherit;
   opacity: 0.8;
   filter: drop-shadow(0px 8px 43px rgba(255, 107, 1, 0.6));
   transform: scale(1.03);
   background-color: rgba(247, 158, 95, 0.6);
+}
+.header__btn.in-active {
+  border: 1px solid var(--accent-color);
+  background-color: var(--accent-color);
+  color: var(--white-text-color);
+  filter: drop-shadow(0px 8px 43px rgba(255, 107, 1, 0.6));
 }

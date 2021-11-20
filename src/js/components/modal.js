@@ -84,7 +84,8 @@ async function onClickOnCard(e) {
       if (e.target === overlayRef) closeModal();
     });
     window.addEventListener('keydown', e => {
-      if (e.code === 'Escape') closeModal();
+      const trailerRef = document.querySelector('.basicLightbox');
+      if (e.code === 'Escape' && !trailerRef) closeModal();
     });
   }
 }
