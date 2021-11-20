@@ -33,6 +33,10 @@ async function getTrailer(id) {
       `<iframe width="560" height="315" style="border: none;" src='https://www.youtube.com/embed/${trailer.key}' allow="fullscreen"></iframe>`,
     );
     popUp.show();
+    
+    window.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && popUp.visible()) popUp.close();
+    });
   });
 }
 

@@ -176,12 +176,10 @@ function onFirstPageBtnClick() {
 }
 
 function setPrevBtn(activeEl, firstEl) {
-  console.log(activeEl, firstEl)
- if (totalPages < pagesInView || (activeEl === 1 && firstEl === 1)) {
-   prevBtn.classList.add('page__hidden');
- } 
- else {
-   prevBtn.classList.remove('page__hidden');
+  if (totalPages < pagesInView || (activeEl === 1 && firstEl === 1)) {
+    prevBtn.classList.add('page__hidden');
+  } else {
+    prevBtn.classList.remove('page__hidden');
   }
 }
 
