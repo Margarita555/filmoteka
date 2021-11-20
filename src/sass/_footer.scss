@@ -1,8 +1,13 @@
+.footer-wrapper {
+  background-color: var(--secondary-bg-color);
+  color: var(--footer-text-color);
+}
+
 .footer-wrapper.light-theme {
   background-color: var(--secondary-bg-color);
   color: var(--footer-text-color);
 }
-.footer-wrapper .dark-theme {
+.footer-wrapper.dark-theme {
   background-color: var(--footer-text-color);
   color: var(--accent-color);
 }
