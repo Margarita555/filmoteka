@@ -1,9 +1,14 @@
-.footer-wrapper .light-theme {
+.footer-wrapper {
   background-color: var(--secondary-bg-color);
   color: var(--footer-text-color);
 }
-.footer-wrapper .dark-theme {
-  background-color: inherit;
+
+.footer-wrapper.light-theme {
+  background-color: var(--secondary-bg-color);
+  color: var(--footer-text-color);
+}
+.footer-wrapper.dark-theme {
+  background-color: var(--footer-text-color);
   color: var(--accent-color);
 }
 .logo-container {
